@@ -78,16 +78,7 @@ g<?php
                                     
                                 
                                     <!-- Query Data -->
-                            <?php
-                            $query = "select * from booking inner join booking_schedule on booking.schedule_id = booking_schedule.schedule_id inner join approved_scrap on booking.booking_id = approved_scrap.booking_id";  
-                            $run_query = mysqli_query($connection,$query);
-                            $return_request_from_run_query = mysqli_num_rows($run_query) > 0;
-                            ?>
-
-
-                            <?php
-                            while($row = mysqli_fetch_array($run_query)){
-                                ?>
+                       
 
                                 <div class="schedule-record p-3 rounded shadow-sm mb-3">
                                         <div class="card-info">
@@ -97,7 +88,7 @@ g<?php
                                                         Tracking Number :
                                                     </p>
                                                     <p class="info-value strong ms-2 mb-0">
-                                                        <?php echo $row['booking_id'];?>
+                                                   ILISI NI
                                                     </p>
                                                 </div>
                                                 <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
@@ -108,7 +99,7 @@ g<?php
                                                         Scrap :
                                                     </p>
                                                     <p class="text-muted ms-2 mb-0">
-                                                         <?php echo $row['scrap_type'];?>
+                                                    ILISI NI
                                                     </p>
                                                 </div>
                                                 <div class="weigh-wrapper d-flex justify-content-between align-items-center ms-3">
@@ -116,7 +107,7 @@ g<?php
                                                         Kg(s) :
                                                     </p>
                                                     <p class="text-muted ms-2 mb-0">
-                                                         <?php echo $row['scrap_weight'];?>
+                                                    ILISI NI
                                                     </p>
                                                 </div>
                                             </div>
@@ -126,15 +117,13 @@ g<?php
                                                         <p class="text-muted fw-bold m-0 text-sm">Processing</p>
                                                     </div>
                                                     <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                    <p class="text-sm m-0 fst-italic fw-bold">  <?php echo $row['date_recieved'];?></p>
+                                                    <p class="text-sm m-0 fst-italic fw-bold">    ILISI NI</p>
                                                 </div>
                                                 <button class="btn btn-outline-secondary btn-sm">View Record</button>
                                             </div>
                                         </div>
                                     </div>
-                        <?php
-                        }
-                                    ?>
+                     
                             </div>
                         </div>
                     </div>

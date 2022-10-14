@@ -2,7 +2,7 @@
         $server_name = "localhost";
         $db_username = "root";
         $db_password = "";
-        $db_name = "juncle";
+        $db_name = "juncle_db";
 
         //Connections: You can use '$connection' or '$conn' the later is shorter.
         $connection = mysqli_connect($server_name, $db_username, $db_password);
