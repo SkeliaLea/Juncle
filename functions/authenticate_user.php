@@ -29,16 +29,16 @@ $return_request_from_run_query = mysqli_num_rows($run_query) > 0;
 
 while($row = mysqli_fetch_array($run_query)){
     // echo $row['first_name'];
-    if($Username == $row['user_name'] AND $Password == $row['password']){
+    if($Username == $row['admin_username'] AND $Password == $row['admin_password']){
         echo "Logging in...";
     
-    $_SESSION["username"] = $row['user_name'];
+    $_SESSION["username"] = $row['admin_username'];
     
     ?>
     <meta http-equiv="refresh" content="0; url=admin_schedule.php" />
 <script>
 //LocalStorage Data for User Credentials
-localStorage.setItem("username", "<?php echo $row['user_name']?>");
+localStorage.setItem("username", "<?php echo $row['admin_username']?>");
 
 // localStorage.setItem("admin_status", "<?php //echo $row['account_status']?>");
 </script>

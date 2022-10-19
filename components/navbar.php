@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <section class="navbar_section">
+    <section class="navbar_section" style="height:1000px;">
         <div class="w-100 nav_bar mt-4" id="nav_bar">
             <ul class="nav_items_wrapper p-0">
                 <li class="nav_item" id="dashboardWrap">
