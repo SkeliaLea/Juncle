@@ -58,6 +58,10 @@
     $(document).ready(function(){
         $("#dashboardWrap").click(function(){
             $(this).addClass('active_nav_item').removeClass('inActive_nav_item');
+            $("#scheduleWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#userWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#rfWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#notifWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
         })
     }) 
     
