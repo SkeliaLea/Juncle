@@ -1,5 +1,5 @@
 <?php
-    include($_SERVER['DOCUMENT_ROOT'].'/Juncle/Juncle/database.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/Juncle/database.php');
     $actionID = $_GET['actionID'];
 
     if($actionID == 1) {
@@ -11,8 +11,7 @@
                                 LEFT JOIN `invoice`ON invoice.booking_id = booking.booking_id
                                 LEFT JOIN `payment` ON payment.invoice_id = invoice.invoice_id
                                 LEFT JOIN `rating` ON rating.booking_id = booking.booking_id
-                                WHERE booking.booking_id = '".$bookingId."'
-                                ";
+                                WHERE booking.booking_id = '".$bookingId."'";
         $executeQuery = mysqli_query($connection, $getAllBookingDetailsById);
         $returnData = mysqli_fetch_assoc($executeQuery);
 
@@ -51,6 +50,31 @@
         $resultArray['rating'] = $returnData['rating'];
         $resultArray['feedback'] = $returnData['feedback'];
         $resultArray['rating_date'] = $returnData['rating_date'];
+
+        echo json_encode($resultArray);
+    }
+
+    if($actionID == 2) {
+        $bookingId = $_GET['bookingId'];
+        $resultArray = array();
+        $getAllDataFromWeightLedgerByPayment = "SELECT * FROM `weight_ledger` 
+                LEFT JOIN `booking` ON weight_ledger.booking_id = booking.booking_id 
+                LEFT JOIN `scrap_type` ON scrap_type.scrap_id = weight_ledger.scrap_id 
+                WHERE booking.booking_id = '".$bookingId."'";
+
+        $executeQuery = mysqli_query($connection, $getAllDataFromWeightLedgerByPayment);
+        $numrows = mysqli_num_rows($executeQuery);
+        // $resultSet = mysqli_fetch_assoc($executeQuery);
+        
+        if($numrows > 0) {
+            while($resultSet = mysqli_fetch_assoc($executeQuery)) {
+                $resultEntity = array();
+                $resultEntity['scrap_name'] = $resultSet['scrap_name'];
+                $resultEntity['weight'] = $resultSet['weight'];
+                $resultEntity['weight_price'] = $resultSet['weight_price'];
+                array_push($resultArray, $resultEntity);
+            }
+        }
 
         echo json_encode($resultArray);
     }

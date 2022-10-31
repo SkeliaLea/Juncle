@@ -197,6 +197,10 @@ input[type=number] {
     width: 45px;
 }
 
+.price-wrap {
+    background-color: #2db671;
+}
+
 /* Components end */
 
 

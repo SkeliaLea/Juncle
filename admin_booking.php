@@ -283,21 +283,39 @@
                         </p>
                     </div>
 
-
-                    <!-- <div class="weight-wrapper mt-2 d-flex align-items-center">
-                        <p class="label-text fw-bold mb-0 text-sm col-4">
-                            Kg(s) :
-                        </p>
-                        <p class="info-value  text-muted ms-2 mb-0 text-sm col-8" id="booking_weight">
-                        </p>
+                    <div class="invoice-wrapper">
+                        <h5 class="mt-3 w-100 information-group-title">Invoice</h5>
+                        <div class="price-wrapper mt-2 d-flex align-items-center">
+                            <p class="schedule-text info-value fw-bold mb-0 text-sm">
+                                Scrap value :
+                            </p>
+                        </div>
+                        <div class = "weight-ledger-container mt-2 w-100">
+                        </div>
+                        
+                        <div class="price-wrapper mt-2 d-flex align-items-center justify-content-between">
+                            <p class="label-text fw-bold mb-0 text-sm col-4">
+                                Service fee :
+                            </p>
+                            <p class="fw-bold info-value ms-2 mb-0 text-sm col-6 text-center" id="service_fee">
+                            </p>
+                        </div>
+                        <div class="price-wrapper mt-2 d-flex align-items-center justify-content-between">
+                            <p class="label-text fw-bold mb-0 text-sm col-4">
+                                Application fee :
+                            </p>
+                            <p class="fw-bold ms-2 mb-0 info-value text-sm col-6 text-center" id="application_fee">
+                            </p>
+                        </div>
+                        <div class="price-wrapper mt-2 d-flex align-items-center justify-content-between">
+                            <h6 class="label-text fw-bold mb-0 text-sm col-4">
+                                Net amount due:
+                            </h6>
+                            <h6 class="fw-bold ms-2 mb-0 text-sm col-6 text-center" id="net_amount_due">
+                            </h6>
+                        </div>
                     </div>
-                    <div class="price-wrapper mt-2 d-flex align-items-center">
-                        <p class="label-text fw-bold mb-0 text-sm col-4">
-                            Total Amount :
-                        </p>
-                        <p class="info-value fw-bold text-muted ms-2 mb-0 text-sm col-8" id="net_amount_due">
-                        </p>
-                    </div> -->
+                    
                 </div>
             </div>
         </div>
@@ -306,6 +324,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+    let selectedBookingId = 0;
 
     const BOOKING_STATUS_PENDING_INT = 1;                     // DB value of "Pending" booking status
     const BOOKING_STATUS_PROCESSING_INT = 2;                  // DB value of "Processing" booking status
@@ -328,6 +348,7 @@
         $("#notifWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
 
         $(".status-filter-0").addClass("selected-status-filter");
+        $(".invoice-wrapper").hide();
     })
 
     //highlight "ALL" status filter; unhighlight others
@@ -394,6 +415,7 @@
     $(".schedule-record").click(function() {
         let bookingId = $(this).attr("bookingId");
         let trackingNo = $(this).attr("trackingNo");
+        selectedBookingId = bookingId;
         let aID = 1;
 
         $("#content_tracking_no").html(trackingNo);
@@ -435,9 +457,12 @@
                 switch(parseInt(value)) {
                     case BOOKING_STATUS_PENDING_INT :
                         document.getElementById("content_"+key).innerHTML = BOOKING_STATUS_PENDING_STRING;
+                        $(".invoice-wrapper").hide();
                         break;
                     case BOOKING_STATUS_PROCESSING_INT :
                         document.getElementById("content_"+key).innerHTML = BOOKING_STATUS_PROCESSING_STRING;
+                        $(".invoice-wrapper").show();
+                        getWeightLedgerByBookingID();
                         break;
                     case BOOKING_STATUS_FOR_PAYMENT_INT :
                         document.getElementById("content_"+key).innerHTML = BOOKING_STATUS_FOR_PAYMENT_STRING;
@@ -464,10 +489,51 @@
             if(key === "booking_created") {
                 $("#content_created_display").html(new Date(value).toDateString());
             }
+
+            // Set invoice price values
+            if(key === "application_fee") {
+                document.getElementById(key).innerHTML = "P "+value;
+            }
+            if(key === "service_fee") {
+                document.getElementById(key).innerHTML = "P "+value;
+            }
+            if(key === "net_amount_due") {
+                document.getElementById(key).innerHTML = "P "+value;
+            }
         })
 
         // set creator display value
         $("#content_user_display").html(creator);
+    }
+
+    function getWeightLedgerByBookingID() {
+        $(".weight-ledger-container").html("");
+
+        let aID = 2;
+        $.ajax({
+                url: "api/api_booking.php",
+                type: "GET",
+                data:
+                {
+                    actionID: aID,
+                    bookingId: selectedBookingId
+                },
+                success: function(data)
+                {
+                    let resultset = JSON.parse(data);
+                    resultset.forEach(function (item) {
+                        $(".weight-ledger-container").append(
+                            `<div class = "border rounded d-flex align-items-center justify-content-between mb-2">` +
+                                `<p class="fw-bold mb-0 info-value text-muted w-25 ms-2">`+item["scrap_name"]+`</p>` +
+                                `<div class="w-75 weight-price-display d-flex align-items-center">` +
+                                    `<p class="fst-italic info-value text-muted mb-0 w-25">`+item["weight"]+` Kg</p>` +
+                                    `<div class="price-wrap w-75 p-2 ms-2 fw-bold rounded info-value text-center">P `+item["weight_price"]+`</div>` +
+                                `</div>` +
+                            `</div>`
+                        );
+                    })
+                }
+            });
     }
     
 </script>
