@@ -1,5 +1,20 @@
 <?php
     include('database.php');
+
+    $BOOKING_STATUS_INT_PENDING = 1;
+    $BOOKING_STATUS_INT_PROCESSING = 2;
+    $BOOKING_STATUS_INT_FOR_PAYMENT = 3;
+    $BOOKING_STATUS_INT_DONE = 4;
+    $BOOKING_STATUS_INT_REJECTED = 5;
+
+    $BOOKING_STATUS_STRING_PENDING = "Pending";
+    $BOOKING_STATUS_STRING_PROCESSING = "Processing";
+    $BOOKING_STATUS_STRING_FOR_PAYMENT = "For Paymnent";
+    $BOOKING_STATUS_STRING_DONE = "Done";
+    $BOOKING_STATUS_STRING_REJECTED = "Rejected";
+
+    $EMPTY_STRING = "";
+
     function getTotalWeightOfScrapPerBooking($booking_id, $connection) {
         $sqlGetTotalWeight = "SELECT SUM(weight) as totalWeight FROM weight_ledger WHERE booking_id = '".$booking_id."'";
         $executeQuery = mysqli_query($connection, $sqlGetTotalWeight);
@@ -14,6 +29,45 @@
             
         } 
     }
+
+    function formatTrackingNumber($bookingId) {
+        $trackingNumber = "".$bookingId;
+        $trackingNumberPrefix = "";
+        
+        for($x = 5; $x > strlen($trackingNumber); $x--) {
+            $trackingNumberPrefix = $trackingNumberPrefix."0";
+        }
+
+        $trackingNumber = $trackingNumberPrefix.$trackingNumber;
+        return $trackingNumber;
+    }
+
+    function getBookingStatusValue($booking_status) {
+        global $BOOKING_STATUS_INT_PENDING, $BOOKING_STATUS_INT_PROCESSING, $BOOKING_STATUS_INT_FOR_PAYMENT, 
+                $BOOKING_STATUS_INT_DONE,  $BOOKING_STATUS_INT_REJECTED, $EMPTY_STRING, $BOOKING_STATUS_STRING_PENDING,
+                $BOOKING_STATUS_STRING_PROCESSING, $BOOKING_STATUS_STRING_FOR_PAYMENT, $BOOKING_STATUS_INT_DONE,
+                $BOOKING_STATUS_STRING_REJECTED;
+
+        switch($booking_status) {
+            case $BOOKING_STATUS_INT_PENDING :
+                return $BOOKING_STATUS_STRING_PENDING;
+            case $BOOKING_STATUS_INT_PROCESSING:
+                return $BOOKING_STATUS_STRING_PROCESSING;
+            case $BOOKING_STATUS_INT_FOR_PAYMENT:
+                return $BOOKING_STATUS_STRING_FOR_PAYMENT;
+            case $BOOKING_STATUS_INT_DONE:
+                return $BOOKING_STATUS_INT_DONE;
+            case $BOOKING_STATUS_INT_REJECTED:
+                return $BOOKING_STATUS_STRING_REJECTED;
+            default:
+                return $EMPTY_STRING;
+        }
+    }
+
+    function formatDate($date) {
+        return date('F d Y', strtotime($date));
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -56,10 +110,11 @@
                                 <p class="text-sm text-muted my-0 me-2">Status:</p>
                                 <select name="" id="" class="p-1 rounded shadow-sm">
                                     <option value="">All</option>
-                                    <option value="">Pending</option>
-                                    <option value="">Approved: Paid</option>
-                                    <option value="">Approved: Unpaid</option>
-                                    <option value="">Cancelled</option>
+                                    <option value="1">Pending</option>
+                                    <option value="2">Processing</option>
+                                    <option value="3">For Payment</option>
+                                    <option value="4">Done</option>
+                                    <option value="5">Rejecred</option>
                                 </select>
                             </div>
                         </div>
@@ -94,7 +149,7 @@
                                                             Tracking Number :
                                                         </p>
                                                         <p class="info-value strong ms-2 mb-0">
-                                                            '.$bookingEntity['trackingNo'].'
+                                                            '.formatTrackingNumber($bookingEntity['booking_id']).'
                                                         </p>
                                                     </div>
                                                     <img class="search-icon me-1" src="assets/delete_schedule_icon.svg">   
@@ -121,10 +176,10 @@
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="d-flex align-items-center mt-3">
                                                         <div class="status-wrapper px-2 py-1 shadow-sm">
-                                                            <p class="text-muted fw-bold m-0 text-sm">Processing</p>
+                                                            <p class="text-muted fw-bold m-0 text-sm">'.getBookingStatusValue($bookingEntity['booking_status']).'</p>
                                                         </div>
-                                                        <p class="text-sm mx-2 m-0 fst-italic">as of</p>
-                                                        <p class="text-sm m-0 fst-italic fw-bold">January 23, 2022</p>
+                                                        <p class="text-sm mx-2 m-0 fst-italic">started on</p>
+                                                        <p class="text-sm m-0 fst-italic fw-bold">'.formatDate($bookingEntity['booking_modified']).'</p>
                                                     </div>
                                                     <button class="btn btn-outline-secondary btn-sm">View Record</button>
                                                 </div>
@@ -221,6 +276,8 @@
         $("#rfWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
         $("#notifWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
     })
+
+    
     
 </script>
 </html>
