@@ -18,8 +18,15 @@
                         </div>
                     </a>
                 </li>
-                <li class="nav_item" id="scheduleWrap">
+                <li class="nav_item" id="bookingWrap">
                     <a href="../Juncle/admin_schedule.php  " class="nav-link">
+                        <div class="nav-item-content d-flex align-items-center ps-2">
+                            <i class="bi bi-truck"></i><p class="ms-3 mb-0">Booking</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="nav_item" id="scheduleWrap">
+                    <a href="" class="nav-link">
                         <div class="nav-item-content d-flex align-items-center ps-2">
                             <i class="bi bi-calendar-week"></i><p class="ms-3 mb-0">Schedule</p>
                         </div>
@@ -46,6 +53,7 @@
                         </div>
                     </a>
                 </li>
+                
             </ul>
         </div>
     </section>
