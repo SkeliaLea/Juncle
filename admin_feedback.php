@@ -57,7 +57,7 @@ g<?php
             <tbody>
                 
                 <?php
-            $query = "select * from rating inner join booking on booking.booking_id = rating.booking_id";
+                            $query = "select * from rating inner join booking on booking.booking_id = rating.booking_id";
                              $query_run = mysqli_query($connection, $query);       
 
                         
@@ -69,16 +69,16 @@ g<?php
                     <td><?php echo $row['rating_id']; ?></td>
                     <td><?php echo $row['booking_id']; ?></td>
                     <td><?php echo $row['rating']; ?></td>
-                    <td><?php echo $row['feedback']; ?></td>
                     <td><?php echo $row['rating_date'];?></td>
                     <td>
+
                     <div class="w3-container">
-                            <button data-target="#customer_inquiry_modal" onclick="display_data('<?php echo $row['subject']?>','<?php echo $row['description']?>')" data-toggle="modal" class="w3-button w3-green">View Details</button>
-                            <div class="modal fade center" id="customer_inquiry_modal">
+                    <button data-target="#customer_feedback_modal" onclick="display_data('<?php echo $row['feedback']?>')" data-toggle="modal" class="w3-button w3-green">View Inquiry</button>
+                    <div class="modal fade center" id="customer_feedback_modal">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5>Feedback</h5>
+                                            <h5>View Feedback</h5>
                                             <button type="button" class="close closeModalButton" data-dismiss="modal">
                                             <span>&times;</span>
                                             </button>
@@ -86,22 +86,7 @@ g<?php
                                              <div class="modal-body">
                                                 <form>
                                                     <div class="mb-3">
-                                                        <label for="subject" class="col-form-label">Name:</label>
-                                                        <input type="text" id="subject"  disabled>
-                                                        <label for="subject" class="col-form-label">ID:</label>
-                                                        <input type="number" id="subject"  disabled>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="subject" class="col-form-label">Email:</label>
-                                                        <input type="email" id="subject"  disabled>
-                                                    </div>
-                                                    <div class="mb-1">
-                                                        <label for="subject" class="col-form-label">Date Created:</label>
-                                                        <input type="date" id="subject"  disabled>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="mb-3">
-                                                        <label for="message" class="col-form-label">Feedback:</label>
+                                                        <label for="message" class="col-form-label">Message:</label>
                                                         <textarea class="form-control" id="message-text" disabled></textarea>
                                                     </div>
                                                  </form>
@@ -119,9 +104,8 @@ g<?php
                              }
                 ?>
                <script>
-                    function display_data(subject, description){
-                        document.getElementById('subject').value = subject;
-                        document.getElementById('message-text').value = description;
+                    function display_data(feedback){
+                        document.getElementById('message-text').value = feedback;
                     }
                 </script>
                 </tbody>
