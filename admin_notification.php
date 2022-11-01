@@ -1,23 +1,34 @@
-
+g<?php 
+    require 'database.php'; 
+    session_start();
+?>
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-<meta charset="UTF-8" http-equiv="Content-Type" content="text/html">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/mainComponent.css">
-
-    <title>Juncle « Notification</title>
-    <link rel="stylesheet" href="/Juncle-main/styles/theme-notification/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="/Juncle-main/styles/theme-notification/themes/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="/Juncle-main/styles/theme-notification/themes/assets/generic.css">
-    <link rel="stylesheet" href="/Juncle-main/styles/theme-notification/themes/default/style.css">
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>Notification</title>
 </head>
+<script>
+    function checkUserIsSignedIn() {
+    if (localStorage.getItem("username") === null) {
+        window.location.href = "index.php";
+       
+    } else {
+        //Do nothing since the user is not yet authenticated
 
-<body class="body-background" >
-
+    }
+}
+</script>
+<script>
+    checkUserIsSignedIn();
+    </script>
+<body class="body-background">
+    
     <?php
         include('components/header.php');
     ?>
@@ -27,113 +38,108 @@
                 include('components/navbar.php');
             ?>
         </div>
-        <div class="col-9">
-        <div class="column-display-wrapper bg-white mx-5 my-2 w-100 p-3 rounded shadow-sm">
-            <!-- START -->
-            <div id="wrapcontainer">
-    	        <div id="container">
-            <div id="content">
-	        <div class="mtcntnr">
-		        <h1 class="module_title">
-        	        <img class="logo_notification" src="assets/notification_icon.svg"></i>  Notification 
-                </h1>
-            <div class="mtshad"></div>
-            </div>
-            <div id="message_container" style="display:none;" class="ui-state-highlight ui-corner-all message_box"> 
-                <span style="float: left; margin-right: .3em;" class="ui-icon ui-icon-info"></span>
-                <span class="message"></span><a class="ui-icon ui-icon-close" href="javascript:void(0)" onclick="javascript:$('#message_container').hide()" style="float:right" title="Close"></a>
-            </div>
-            <div id="main">
-                <div class="module_content">
 
-            <div id="notification_list_wrapper">
-            <h2>Bookings</h2>
-            <table style="margin:0px" summary="Schedule" class="formtable" id="box-table-a">
-                <thead>
-                    <tr>
-                        <th width="30%" scope="col">Event</th>
-                        <th width="40%" scope="col">Description</th>
-                        <th width="10%" style="text-align:center" scope="col">Status</th>
-                        <th width="20%" style="text-align:center" scope="col">Action</th>
-                    </tr>
-                </thead>
-            <tbody>
-            <tr class="hover-link">
-            <td>Schedule</td>
-                <td>
-                    <span class="badge badge-info"> 20</span> Customer(s) that are booking for a schedule.                          
-                </td>
-                <td style="text-align:center">
-                    <span class="badge badge-success"><i class="icon icon-ok icon-white"> </i> Seen</span>                      </td>
-                <td style="text-align:center">
-                    <div class="overlay" style="height: -10px; display: true;">
-                        <a href="" style="padding:0px 7px 0px 5px" class="btn btn-edit-type"><i class="icon-search"> </i> View Details</a>
-                    </div>
-                </td>
-            </tr>
-            <tr class="hover-link">
-            <td>Pick Up</td>
-                <td>
-                    <span class="badge badge-info"> 360</span> Customer(s) scheduled for pick up.                          
-                </td>
-                <td style="text-align:center">
-                    <span class="badge badge-success"><i class="icon icon-ok icon-white"> </i> Seen</span>                      </td>
-                <td style="text-align:center">
-                    <div class="overlay" style="height: -10px; display: true;"> <!--SHOULD BE none!-->
-                        <a href="" style="padding:0px 7px 0px 5px" class="btn btn-edit-type"><i class="icon-search"> </i> View Details</a>
-                    </div>
-                </td>
-            </tr>                  
-            </table>
-    <br><br>
-            <h2>Feedbacks</h2>
-                <table style="margin:0px" summary="Schedule" class="formtable" id="box-table-a">
-                    <thead>
-                        <tr>
-                            <th width="30%" scope="col">Event</th>
-                            <th width="40%" scope="col">Description</th>
-                            <th width="10%" style="text-align:center" scope="col">Status</th>
-                            <th width="20%" style="text-align:center" scope="col">Action</th>
-                        </tr>
-                    </thead>
-                <tbody>
-                <tr class="hover-link">
-                    <td>Review</td>
-                      <td>
-                          <span class="badge badge-info">22</span> App Review                          
-                      </td>
-                      <td style="text-align:center">
-                          <span class="badge badge-success"><i class="icon icon-ok icon-white"> </i> Seen</span>                      </td>
-                      <td style="text-align:center">
-                          <div class="overlay" style="height: -10px; display: true;">
-                              <a href="" style="padding:0px 7px 0px 5px" class="btn btn-edit-type"><i class="icon-search"> </i> View Details</a>
-                          </div>
-                      </td>
+        <div class="col-3" style="padding-left:50px;">
+            <!-- ari imo code -->
+            <div class="column-display-wrapper bg-white rounded shadow-sm" style="width: 1000px;">
+            <h1 class="section title" style="padding-left: 5px;">Notification</h1>
+            <table class="table table-hover" >
+            <thead>
+                <tr>
+                    <th scope="col">Notification ID</th>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Module</th>
+                    <th scope="col">Module ID</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Notification Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+
                 </tr>
-                <tr class="hover-link">
-                    <td>Service Review</td>
-                      <td>
-                          <span class="badge badge-info"> 3</span> Review of the transaction                          
-                      </td>
-                      <td style="text-align:center">
-                          <span class="badge badge-warning"><i class="icon icon-info-sign icon-white"> </i> New</span>                      </td>
-                      <td style="text-align:center">
-                          <div class="overlay" style="height: -10px; display: true;">
-                              <a href="" style="padding:0px 7px 0px 5px" class="btn btn-edit-type"><i class="icon-search"> </i> View Details</a>
-                          </div>
-                      </td>
-                </tr>                       
-                </table>
-            </div><!-- #NOTIFICATION LIST WRAPPER -->
+            </thead>
+            <tbody>
+                <!--
+                <?php
+            $query = "";
+                             $query_run = mysqli_query($connection, $query);       
 
-                </div><!-- #MODULE -->
-            </div><!-- #MAIN -->
-            </div><!-- #CONTENT -->
-                </div><!-- #container -->
-	        </div><!-- #wrapcontainer -->
+                        
+                             while($row = mysqli_fetch_array($query_run)){
+                              
+                          
+                            ?>
+                <tr>
+                    <td><?php echo $row['notification_id']; ?></td>
+                    <td><?php echo $row['user_id']; ?></td>
+                    <td><?php echo $row['module']; ?></td>
+                    <td><?php echo $row['module_id']; ?></td>
+                    <td><?php echo $row['seen_status'];?></td>
+                    <td><?php echo $row['notification_title'];?></td>
+                    <td><?php echo $row['description'];?></td>
+                    <td>!-->
+                        <tr>
+                        <td>TEST</td>
+                        <td>Placeholder</td>
+                        <td>Placeholder</td>
+                        <td>Placeholder</td>
+                        <td>Placeholder</td>
+                    <div class="w3-container">
+                            <button data-target="#customer_inquiry_modal" onclick="display_data('<?php echo $row['subject']?>','<?php echo $row['description']?>')" data-toggle="modal" class="w3-button w3-green">View Details</button>
+                            <div class="modal fade center" id="customer_inquiry_modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5></h5>
+                                            <button type="button" class="close closeModalButton" data-dismiss="modal">
+                                            <span>&times;</span>
+                                            </button>
+                                        </div>
+                                             <div class="modal-body">
+                                                <form>
+                                                    <div class="mb-3">
+                                                        <label for="subject" class="col-form-label">Name:</label>
+                                                        <input type="text" id="subject"  disabled>
+                                                        <label for="subject" class="col-form-label">ID:</label>
+                                                        <input type="number" id="subject"  disabled>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="subject" class="col-form-label">Email:</label>
+                                                        <input type="email" id="subject"  disabled>
+                                                    </div>
+                                                    <div class="mb-1">
+                                                        <label for="subject" class="col-form-label">Date Created:</label>
+                                                        <input type="date" id="subject"  disabled>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="mb-3">
+                                                        <label for="message" class="col-form-label">Feedback:</label>
+                                                        <textarea class="form-control" id="message-text" disabled></textarea>
+                                                    </div>
+                                                 </form>
+                                             </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div> 
+                    </td>
+                </tr>
+                <?php 
+                             }
+                ?>
+               <script>
+                    function display_data(subject, description){
+                        document.getElementById('subject').value = subject;
+                        document.getElementById('message-text').value = description;
+                    }
+                </script>
+                </tbody>
+            </table>
+            </div>
         </div>
-        </div>
-    </section>
+        </section>
 </body>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
