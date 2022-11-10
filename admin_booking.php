@@ -446,9 +446,10 @@
 
     //booking item click listener ; fetch specific bookingdetails by id
     $(".schedule-record").click(function() {
-        
+
         $("#noDisplay").removeClass("my-5");
         $("#noDisplay").html("");
+        
         $("#contentBoardWrap").show();
         
         let bookingId = $(this).attr("bookingId");
