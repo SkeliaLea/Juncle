@@ -449,9 +449,8 @@
 
         $("#noDisplay").removeClass("my-5");
         $("#noDisplay").html("");
-        
+
         $("#contentBoardWrap").show();
-        
         let bookingId = $(this).attr("bookingId");
         let trackingNo = $(this).attr("trackingNo");
         selectedBookingId = bookingId;
