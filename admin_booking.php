@@ -32,6 +32,7 @@
     function formatTrackingNumber($booking_id) {
         $bookingID = "".$booking_id;
         $prefixTrackingNo = "";
+        
 
         for($length = 5; $length > strlen($bookingID); $length--) {
             $prefixTrackingNo = $prefixTrackingNo."0";
