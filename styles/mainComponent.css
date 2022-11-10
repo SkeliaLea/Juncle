@@ -125,6 +125,7 @@ input[type=number] {
 /* InputFields start */
 .search_field {
     border: none;
+    width: 280px;
 }
 
 .search_field:focus{
@@ -137,6 +138,7 @@ input[type=number] {
 /* Components start */
 .search-bar-container {
     border: 1px solid rgb(135, 135, 135);
+    width: 300px;
 }
 
 .scrollbarContent {
@@ -148,17 +150,61 @@ input[type=number] {
 .scrollbarSchedule {
     overflow: hidden;
     overflow-y: auto;
-    height: 66vh;
+    height: 61vh;
 }
 
 .schedule-record:hover {
     background-color: #f1faf5;
 }
 
+.schedule-record {
+    background-color: #f8f8f8;
+}
+
 .status-wrapper {
     border-radius: 50px;
     background-color: #BDE7BD;
 }
+
+.booking-status-filter {
+    list-style-type: none;
+}
+
+.booking-status-filter > li:hover {
+    cursor: pointer;
+}
+
+.vertical-separator {
+    width: 2px;
+    height: 25px;
+    background-color: #b8b8b8;  
+}
+
+.selected-status-filter {
+    background-color: rgb(229, 229, 229);
+    border-radius: 200px;
+    font-weight: 700;
+}
+
+.unselected-status-filter {
+    background-color: #fff;
+    font-weight: 400;
+}
+
+.user-image {
+    border-radius: 200px;
+    height: 45px;
+    width: 45px;
+}
+
+.price-wrap {
+    background-color: #2db671;
+}
+
+.net-amount-display {
+    color: #2db671;
+}
+
 /* Components end */
 
 
@@ -172,21 +218,43 @@ input[type=number] {
 }
 
 .item-image-wrapper {
+    max-height: 211px;
+    max-width: 305px;
     min-height: 211px;
     min-width: 305px;
-    background-color: #999;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#booking_image {
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
 }
 /* Assets end */
 
 
 
 /* Text start */
+
 .text-sm {
     font-size: 14px;
 }
 
 .info-value {
     text-align: left;
+    font-size: 12px;
+}
+
+.label-text {
+    font-size: 12px;
+}
+
+.information-group-title, .information-group {
+    color: #77DD77;
 }
 
 /* text end */
