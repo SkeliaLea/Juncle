@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li class="nav_item" id="bookingWrap">
-                    <a href="../Juncle/admin_schedule.php  " class="nav-link">
+                    <a href="../Juncle/admin_booking.php" class="nav-link">
                         <div class="nav-item-content d-flex align-items-center ps-2">
                             <i class="bi bi-truck"></i><p class="ms-3 mb-0">Booking</p>
                         </div>
@@ -66,6 +66,52 @@
     $(document).ready(function(){
         $("#dashboardWrap").click(function(){
             $(this).addClass('active_nav_item').removeClass('inActive_nav_item');
+            $("#scheduleWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#userWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#rfWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#notifWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#bookingWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+        })
+
+        $("#scheduleWrap").click(function(){
+            $(this).addClass('active_nav_item').removeClass('inActive_nav_item');
+            $("#dashboardWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#userWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#rfWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#notifWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#bookingWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+        })
+
+        $("#userWrap").click(function(){
+            $(this).addClass('active_nav_item').removeClass('inActive_nav_item');
+            $("#dashboardWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#scheduleWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#rfWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#notifWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#bookingWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+        })
+
+        $("#rfWrap").click(function(){
+            $(this).addClass('active_nav_item').removeClass('inActive_nav_item');
+            $("#dashboardWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#scheduleWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#userWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#notifWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#bookingWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+        })
+
+        $("#notifWrap").click(function(){
+            $(this).addClass('active_nav_item').removeClass('inActive_nav_item');
+            $("#dashboardWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#scheduleWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#userWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#rfWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#bookingWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+        })
+
+        $("#bookingWrap").click(function(){
+            $(this).addClass('active_nav_item').removeClass('inActive_nav_item');
+            $("#dashboardWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
             $("#scheduleWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
             $("#userWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
             $("#rfWrap").addClass('inActive_nav_item').removeClass("active_nav_item");

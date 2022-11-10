@@ -201,6 +201,10 @@ input[type=number] {
     background-color: #2db671;
 }
 
+.net-amount-display {
+    color: #2db671;
+}
+
 /* Components end */
 
 
@@ -218,17 +222,17 @@ input[type=number] {
     max-width: 305px;
     min-height: 211px;
     min-width: 305px;
-    background-color: rgb(213, 213, 213);
+    background-color: #fff;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden
 }
 
 #booking_image {
-    flex-shrink: 0;
-    min-width: 100%;
-    min-height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
 }
 /* Assets end */
 
@@ -249,7 +253,7 @@ input[type=number] {
     font-size: 12px;
 }
 
-.information-group-title {
+.information-group-title, .information-group {
     color: #77DD77;
 }
 
