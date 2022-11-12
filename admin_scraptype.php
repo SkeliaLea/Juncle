@@ -110,7 +110,7 @@ g<?php
             <tbody>
 
             <?php
-                            $query = "select * from scrap_type";
+                            $query = "select * from scrap_type where status ='0'";
                              $query_run = mysqli_query($connection, $query);       
 
                         
@@ -141,25 +141,25 @@ g<?php
                                                 <form>
                                                     <div class="mb-3">
                                                         <label for="scrap_id" class="col-form-label">Scrap ID:</label>
-                                                        <input type="text" id="scrap_id" disabled>
+                                                        <input type="text" id="scrap_id" class ="scrap_id" name ="scrap_id" >
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="scrap_name" class="col-form-label">Scrap Name:</label>
-                                                        <input type="text" id="scrap_name" disabled>
+                                                        <input type="text" id="edit_crap_name" class ="edit_crap_name" name = "edit_crap_name" >
                                                     </div>
                                                     <div>
                                                         <label for="scrap_price" class="col-form-label">Scrap Price:</label>
-                                                        <input type="text" id="scrap_price" disabled>
+                                                        <input type="text" id="edit_price_scrap" class ="edit_price_scrap" name ="edit_price_scrap">
                                                     </div>
                                                     <div>
                                                         <label for="price_update_date" class="col-form-label">Price Update Date</label>
-                                                        <input type="text" id="price_update_date" disabled>
+                                                        <input type="text" id="edit_price_update_date" class ="edit_price_update_date" name ="edit_price_update_date">
                                                     </div>
                                                  </form>
                                              </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-danger" >Delete</button>
-                                                    <button class="btn btn-secondary">Edit</button>
+                                                    <button class="btn btn-danger" id ="deletescrap" name ="deletescrap">Delete</button>
+                                                    <button class="btn btn-secondary" id ="editscrap" name ="editscrap">Edit</button>
                                                     <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                                 </div>
                                             
@@ -177,9 +177,9 @@ g<?php
                <script>
                     function display_data(scrap_id, scrap_name, scrap_price, price_update_date){
                         document.getElementById('scrap_id').value = scrap_id;
-                        document.getElementById('scrap_name').value = scrap_name;
-                        document.getElementById('scrap_price').value = scrap_price;
-                        document.getElementById('price_update_date').value = price_update_date;
+                        document.getElementById('edit_crap_name').value = scrap_name;
+                        document.getElementById('edit_price_scrap').value = scrap_price;
+                        document.getElementById('edit_price_update_date').value = price_update_date;
                     }
 
                     
@@ -196,6 +196,70 @@ g<?php
                                     scrapupdatedate: $("#date_scrap").val(),
                                                                                                         
                                 },
+                                success: function(result) {
+                                window.location.href = "admin_scraptype.php";
+                                console.log("Successfully added a record.");
+                                   
+                                                              
+                            
+                                                                            
+                                },
+                                error: function(data) {
+                                alert("error occured" + data); //===Show Error Message====
+
+                                }
+
+                            });
+
+
+                        });
+
+                        let editbtn = document.querySelector('#editscrap');
+                        editbtn.addEventListener('click', () => {
+                        //    alert($("#price_scrap").val(),);
+                            $.ajax({
+                                url: 'functions/edit_scrap.php',
+                                type: 'POST',
+                                data: {
+                                    scrapid: $(".scrap_id").val(),
+                                    namescrap: $(".edit_crap_name").val(),
+                                    pricescrap: $(".edit_price_scrap").val(),
+                                    scrapupdatedatee: $(".edit_price_update_date").val(),
+                                                                                                        
+                                },
+                                
+                                success: function(result) {
+                                window.location.href = "admin_scraptype.php";
+                                console.log(scrapname);
+                                console.log(scrapprice);
+                                console.log("Successfully added a record.");
+                                   
+                                                              
+                            
+                                                                            
+                                },
+                                error: function(data) {
+                                alert("error occured" + data); //===Show Error Message====
+
+                                }
+
+                            });
+
+
+                        });
+                        
+                        let deletebtn = document.querySelector('#deletescrap');
+                        deletebtn.addEventListener('click', () => {
+                        //    alert($("#price_scrap").val(),);
+                            $.ajax({
+                                url: 'functions/delete_scrap.php',
+                                type: 'POST',
+                                data: {
+                                    deleteid: $(".scrap_id").val(),
+                                   
+                                                                                                        
+                                },
+                                
                                 success: function(result) {
                                 window.location.href = "admin_scraptype.php";
                                 console.log("Successfully added a record.");
