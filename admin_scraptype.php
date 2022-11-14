@@ -141,7 +141,7 @@ g<?php
                                                 <form>
                                                     <div class="mb-3">
                                                         <label for="scrap_id" class="col-form-label">Scrap ID:</label>
-                                                        <input type="text" id="scrap_id" class ="scrap_id" name ="scrap_id" >
+                                                        <input type="text" id="scrap_id" class ="scrap_id" name ="scrap_id" disabled>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="scrap_name" class="col-form-label">Scrap Name:</label>
@@ -159,7 +159,7 @@ g<?php
                                              </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-danger" id ="deletescrap" name ="deletescrap">Delete</button>
-                                                    <button class="btn btn-secondary" id ="editscrap" name ="editscrap">Edit</button>
+                                                    <button class="btn btn-secondary" id ="editscrap" name ="editscrap">Confirm Edit</button>
                                                     <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                                 </div>
                                             
