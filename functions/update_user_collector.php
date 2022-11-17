@@ -12,7 +12,8 @@ $post_params_field_array = array(
      "edit_email",//4
      "edit_address",//5
      "edit_password",//6
-     "edit_plate_number"//7
+     "edit_plate_number",//7,
+     "edit_cont_number"
      );
      ?>
 <script>
@@ -47,10 +48,10 @@ alert($post_params_field_array_data_value[6]);
 
 
 $query = "UPDATE collector
-SET collector_firstname = '".$post_params_field_array_data_value[1]."', collector_middlename = '".$post_params_field_array_data_value[2]."', collector_lastname = '".$post_params_field_array_data_value[3]."',
+SET contact_number = '".$post_params_field_array_data_value[8]."', collector_firstname = '".$post_params_field_array_data_value[1]."', collector_middlename = '".$post_params_field_array_data_value[2]."', collector_lastname = '".$post_params_field_array_data_value[3]."',
 collector_email = '".$post_params_field_array_data_value[4]."', collector_address = '".$post_params_field_array_data_value[5]."', password ='".$post_params_field_array_data_value[6]."', plate_number = '".$post_params_field_array_data_value[7]."' WHERE collector_id = '".$post_params_field_array_data_value[0]."';";
 $query_run = mysqli_query($connection, $query);
-// header("Location: ../admin_usermanagement.php");
+header("Location: ../admin_usermanagement.php");
 
 
 

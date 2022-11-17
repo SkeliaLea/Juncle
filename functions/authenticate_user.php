@@ -35,7 +35,7 @@ while($row = mysqli_fetch_array($run_query)){
     $_SESSION["username"] = $row['admin_username'];
     
     ?>
-    <meta http-equiv="refresh" content="0; url=admin_schedule.php" />
+    <meta http-equiv="refresh" content="0; url=admin_dashboard.php" />
 <script>
 //LocalStorage Data for User Credentials
 localStorage.setItem("username", "<?php echo $row['admin_username']?>");

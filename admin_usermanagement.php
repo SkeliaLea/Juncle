@@ -1,6 +1,46 @@
 <?php 
     require 'database.php'; 
     session_start();
+
+    if(isset($_POST["addhoabtn"]))
+                                            {
+                                            $firstname  =$_POST["hoa_first_name"];
+                                            $last  =$_POST["hoa_last_name"];
+                                            $email  =$_POST["hoa_email"];
+                                            $tele  =$_POST["hoa_telephone"];
+                                            $cont  =$_POST["hoa_contact_number"];
+                                            $user  =$_POST["hoa_name"];
+                                            $pass  =$_POST["hoa_password"];
+                                        
+                                            $query = "insert into user (user_last_name, user_first_name, user_email, user_phone, user_tel, username, password, status) values ('$firstname' , '$last' , '$email', '$cont', '$tele', '$user', '$pass','0')";
+                                            $query_run = mysqli_query($connection, $query);
+                                            header("Location: admin_usermanagement.php");
+                                            
+                                            }
+    if(isset($_POST["btnhoaupdate"])){
+
+        $edit_id = $_POST["hoa_edit_id"];
+        $edit_firstname = $_POST["hoa_edit_fname"];
+        $edit_last = $_POST["hoa_edit_lname"];
+        $edit_email = $_POST["hoa_edit_email"];
+        $teleedit = $_POST["hoa_edit_tele"];
+        $editcontact = $_POST["hoa_edit_cont"];
+        $edit_user = $_POST["hoa_edit_username"];
+        $edit_pass = $_POST["hoa_edit_password"];
+
+        // $query2 = "
+        // UPDATE user
+        // SET user_first_name = '$edit_firstname', user_last_name = '$edit_last', user_email = '$edit_email', user_phone = '$edit_cont', user_tel = '$user_tele', username = '$edit_user', password ='$edit_pass'
+        // where user_id = '$edit_id'
+        // ";
+        $query2 = "UPDATE user set user_first_name = '$edit_firstname',  user_last_name = '$edit_last', user_email = '$edit_email', user_phone = '$editcontact', user_tel = '$teleedit', username = '$edit_user', password ='$edit_pass'
+        where user_id = '$edit_id'";
+        $query_run = mysqli_query($connection, $query2);
+        header("Location: admin_usermanagement.php");
+        
+        }
+                                            
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -404,9 +444,11 @@
                                             document.getElementById("edit_collector_mname").disabled = true;
                                             document.getElementById("edit_collector_lname").disabled = true;
                                             document.getElementById("edit_collector_email").disabled = true;
-                                            document.getElementById("edit_collector_address").disabled = true;
+                                            document.getElementById("edit_collector_contact").disabled = true;
                                             document.getElementById("edit_plate_number").disabled = true;
                                             document.getElementById("edit_collector_address").disabled = true;
+                                            document.getElementById("edit_collector_contact").disabled = true;
+                                            
                                             var pw = document.getElementById('edit_collector_password');
                                             pw.setAttribute('type', 'password');
                                         }
@@ -438,6 +480,9 @@
                                     <br>
                                     <label>Address</label><br>
                                     <input type="text" name="edit_collector_address" id = "edit_collector_address" style = "width: 100%;" value = "" disabled>
+                                    <br>
+                                    <label>Contact Number</label><br>
+                                    <input type="text" name="edit_collector_contact" id = "edit_collector_contact" style = "width: 100%;" value = "" disabled>
                                     <br>
                                     <label>Plate Number</label><br>
                                     <input type="text" name="edit_plate_number" id = "edit_plate_number" style = "width: 100%;" value = "" disabled>
@@ -538,9 +583,9 @@
 
 
                                    <button onclick="displaycollector('<?php echo $row['collector_id']?>' , '<?php echo $row['collector_firstname']?>', '<?php echo $row['collector_middlename']?>','<?php echo $row['collector_lastname']?>',
-                                   '<?php echo $row['collector_email']?>','<?php echo $row['collector_address']?>','<?php echo $row['plate_number']?>','<?php echo $row['password']?>')" class="w3-button w3-green btn-sm" style ="border-radius:5px;">View Details</button> 
+                                   '<?php echo $row['collector_email']?>','<?php echo $row['collector_address']?>','<?php echo $row['plate_number']?>','<?php echo $row['password']?>' ,'<?php echo $row['password']?>', '<?php echo $row['contact_number']?>')" class="w3-button w3-green btn-sm" style ="border-radius:5px;">View Details</button> 
                                    <script>
-                                    function displaycollector(id,fname,mname,lname,email, address, pnumber, pw){
+                                    function displaycollector(id,fname,mname,lname,email, address, pnumber, pw,conta){
                                         document.getElementById('editcollectormodal').style.display='block';
 
                                         document.getElementById("edit_collector_id").value = id;
@@ -549,8 +594,11 @@
                                         document.getElementById("edit_collector_lname").value = lname;
                                         document.getElementById("edit_collector_email").value = email;
                                         document.getElementById("edit_collector_address").value = address;
+                                       
+                    
                                         document.getElementById("edit_plate_number").value = pnumber;
                                         document.getElementById("edit_collector_password").value = pw;
+                                        document.getElementById("edit_collector_contact").value = conta;
 
                                     }
                                    </script>
@@ -623,12 +671,406 @@ function activatecollector(id){
                                 ?>
                      </table>
                 </div>
+                <!-- HOA NIIIIIII -->
+                <div style="width:1000px">
+                <div style="display:flex;" >
+                    <h1 class=" float-start section title" style="flex:50%;padding-left: 5px; position:block;">HOA/PM Account Management</h1>
                 
+
+                    <button onclick="document.getElementById('add_hoa_modal').style.display='block'" class="btn btn-primary btn-sm" style="padding-left: 5px; margin-top:2%;float:right; height :50%; margin-right:3%;">+ Add New User</button>
+                    </div>
+                    <br>
+                    </div>
+                    <div class="column-display-wrapper bg-white rounded shadow-sm" style="width: 1000px; height:50%; overflow:hidden; overflow-y: scroll;">
+
+                    <!-- start admin management -->
+                    <br>
+                    <table name="collect_account" id="collect_account"  class= "w3-hoverable w3-centered table-responsive" style="width:100%;" >
+                            <!-- end collector -->
+                                
+                            <tr>
+                                <th style="width:5%$">ID</th>
+                                <th style="width:12.5%;">User Name</th>
+                                <th style="width:12.5%;">Full Name</th>
+                                <th style="width:12.5%;">Email</th>
+                                <th style="width:12.5%;">Phone Number</th>
+                                <th style="width:12.5%;">Telephone Number</th>
+                                <th style="width:12.5%;">Account Status</th>
+                                <th style="width:17.5%;">Settings</th>
+
+                                
+
+                            </tr>
+                            <?php 
+                               $query = "select * from user where status != '2' ";
+                               $query_run = mysqli_query($connection, $query);       
+  
+                          
+                               while($row = mysqli_fetch_array($query_run)){
+                                
+                            ?>
+                            <tr>
+                            <td><?php echo $row['user_id']; ?></td>
+                            <td><?php echo $row['username']; ?></td>
+                                <td><?php echo $row['user_first_name'].' '.$row['user_last_name']; ?></td>
+                                <td><?php echo $row['user_email']; ?></td>
+                                <td><?php echo $row['user_phone']; ?></td>
+                                <td><?php echo $row['user_tel']; ?></td>
+                              
+                                <td><?php if ($row['status']  == 0){
+                                      ?> 
+                                        <p style ="color:green;"> Activated </p>
+                                      <?php 
+                                    }
+                                    else if ($row['status'] == 1){
+                                        ?> 
+                                          <p style ="color:red;"> Suspended </p>
+                                        <?php 
+                                    }
+                                    
+                                    ?></td>
+                                <td>
+<!-- settings -->
+<div class="w3-container">
+    <div style ="display:flex">     
+                                <div style="flex:50%; padding-right:5px;">
+                            <button onclick="displayhoa(
+                                '<?php echo $row['user_id']?>','<?php echo $row['user_first_name']?>','<?php echo $row['user_last_name']?>','<?php echo $row['user_tel']?>',
+                                '<?php echo $row['user_phone']?>','<?php echo $row['user_email']?>','<?php echo $row['username']?>','<?php echo $row['password']?>'
+                            )" class="w3-button w3-green btn-sm" style ="border-radius:5px;">View Details</button>
+                        
+                                </div>
+                                <div style="flex:50%; ">
+                         <?php if($row['status']=='0'){?> 
+                          <button onclick="suspendhoa(<?php echo $row['user_id']; ?>)" class="w3-button w3-red btn-sm" style ="border-radius:5px;"> Suspend</button>
+                    
+                         
+                            <?php } else if($row['status']=='1') { ?>
+                          <button onclick="activatehoa(<?php echo $row['user_id'];?>)" class="w3-button w3-green btn-sm" style ="border-radius:5px;"> Activate</button>
+                                <?php } ?>
+                                
+                            </div>
+                            </div>
+                                <script>
+                                 function displayhoa(hoa_id, fname, lname, tele, cont, email,uname,pw){
+                                    
+                                    document.getElementById('hoamodal').style.display='block';
+                                    document.getElementById('hoa_edit_id').value = hoa_id;
+                                    document.getElementById('hoa_edit_fname').value = fname;
+                                    document.getElementById('hoa_edit_lname').value = lname;
+                                    document.getElementById('hoa_edit_tele').value = tele;
+                                    document.getElementById('hoa_edit_cont').value = cont;
+                                    document.getElementById('hoa_edit_email').value = email;
+                                    document.getElementById('hoa_edit_username').value = uname;
+                                    document.getElementById('hoa_edit_password').value = pw;
+
+                                   
+                                }
+
+                                function suspendhoa(hoa){
+                                   
+                                    $.ajax({
+                                                        url: 'functions/suspendhoa.php',
+                                                        type: 'POST',
+                                                        data: {
+
+                                                            suspend_hoa_id: hoa,
+                                                           
+                                                        },
+                                                        success: function(result) {
+                                                            alert("Successfully Suspended a record!");
+                                                            console.log("Successfully suspended a record.");
+                                                            console.log(hoa);
+                                                           
+                                                            //display loader
+                                                            window.location.href = "admin_usermanagement.php";
+                                                        
+                                                        },
+                                                        error: function(data) {
+                                                            alert("error occured" + data); //===Show Error Message====
+
+                                                        }
+
+                                                    });
+                                }
+                                function activatehoa(hoa){
+                                   
+                                   $.ajax({
+                                                       url: 'functions/activatehoa.php',
+                                                       type: 'POST',
+                                                       data: {
+
+                                                        activate_hoa_id: hoa,
+                                                          
+                                                       },
+                                                       success: function(result) {
+                                                           alert("Successfully Activated a record!");
+                                                           console.log("Successfully Activated a record.");
+                                                           console.log(hoa);
+                                                          
+                                                           //display loader
+                                                           window.location.href = "admin_usermanagement.php";
+                                                       
+                                                       },
+                                                       error: function(data) {
+                                                           alert("error occured" + data); //===Show Error Message====
+
+                                                       }
+
+                                                   });
+                               }
+                                </script>
+
+                                <div id="hoamodal" class="w3-modal">
+                                <div class="w3-modal-content w3-animate-bottom" style="width:20%;" >
+                                  <!-- start edit modal -->
+                                <div id="hoamodal" class="modal-header w3-green">
+                                    <span onclick="closeviewhoamodal()" class="w3-button w3-display-topright">&times;</span>
+                                    <script>
+                                        function closeviewhoamodal(){
+                                            document.getElementById('hoamodal').style.display='none';
+                                            document.getElementById("hoa_edit_fname").disabled = true;
+                                            document.getElementById("hoa_edit_lname").disabled = true;
+                                            document.getElementById("hoa_edit_tele").disabled = true;
+                                            document.getElementById("hoa_edit_cont").disabled = true;
+                                            document.getElementById("hoa_edit_email").disabled = true;
+                                            document.getElementById("hoa_edit_username").disabled = true;
+                                            document.getElementById("hoa_edit_password").disabled = true;
+                                            var p = document.getElementById('hoa_edit_password');
+                                            p.setAttribute('type', 'password');
+                                        }
+                                        </script>
+
+                                    <h4 class="modal-title ">View Details</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    
+                                    <p style ="color:red;" class="result_display" id="result_display"> </p>
+                                    <form method="POST" id="editform">
+                                    <label>ID: </label>
+                                    <input type="text" name="hoa_edit_id" id = "hoa_edit_id" style = "width: 100%;"  readonly>
+                                    
+                                    <br>
+                            
+                                    <label>First Name</label><br>
+                                    <input type="text" name="hoa_edit_fname" id = "hoa_edit_fname" style = "width: 100%;"  value = "" disabled>
+                                    <br>
+                                    <label>Last Name</label><br>
+                                    <input type="text" name="hoa_edit_lname" id = "hoa_edit_lname" style = "width: 100%;" value = "" style="border-radius:5px; width:100%; " disabled>
+                                    <br>
+                                    <label>Telephone</label><br>
+                                    <input type="text" name="hoa_edit_tele" id = "hoa_edit_tele" style = "width: 100%;"  value = ""  disabled>
+                                    <br>
+                                    <label>Contact Number</label><br>
+                                    <input type="text" name="hoa_edit_cont" id = "hoa_edit_cont" style = "width: 100%;"  value = ""  disabled>
+                                    <br>
+                                    <label>Email Address</label><br>
+                                    <input type="text" name="hoa_edit_email" id = "hoa_edit_email" style = "width: 100%;"  value = ""  disabled>
+                                    <br>
+                                    <label>Username</label><br>
+                                    <input type="text" name="hoa_edit_username" id = "hoa_edit_username" style = "width: 100%;" value = "" disabled>
+                                    <br>
+                                    <label>Password</label><br>
+                                    <input type="password" name="hoa_edit_password" id = "hoa_edit_password" style = "width: 100%;" value = ""  disabled>
+                                    <br>
+                                    <!-- e add pani -->
+                             
+                 
+  
+                        <br>
+                       
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" onclick ="deletehoa()" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                                        <button type="button" onclick ="edithoa()" name="edit" id="edit" class="btn btn-secondary">Edit</button>
+                                        <input type="submit" value="Confirm" name= "btnhoaupdate" id="btnhoaupdate" class="btn btn-primary">
+                                        </form>
+                                    </div>
+
+                                    <!-- delete modal -->
+                                    <div class="modal" id="deletemodal" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Delete User</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick ="closehoadelete()" >
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure to delete this user?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" onclick="confirmdeletehoa()">Delete</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick ="closehoadelete()">Close</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    <!-- end delete modal -->
+                                    <script>
+
+                                        function confirmdeletehoa(){
+                                          
+                                            var hoa_delete_id = document.getElementById("hoa_edit_id").value;
+                                            console.log(hoa_delete_id);
+                                            $.ajax({
+                                                        url: 'functions/delete_user_hoa.php',
+                                                        type: 'POST',
+                                                        data: {
+
+                                                            delete_hoa_id: hoa_delete_id,
+                                                           
+                                                        },
+                                                        success: function(result) {
+                                                        
+                                                            console.log("Successfully deleted a record.");
+                                                        
+                                                            window.location.href = "admin_usermanagement.php";
+                                                            //display loader
+                                                       
+                                                        
+                                                        },
+                                                        error: function(data) {
+                                                            alert("error occured" + data); //===Show Error Message====
+
+                                                        }
+
+                                                    });
+                                        }
+                
+
+                                        function closehoadelete(){
+                                            document.getElementById('deletemodal').style.display='none';
+                                        }
+                                        function deletehoa(){
+
+                                            document.getElementById('deletemodal').style.display='block';
+                                            var delete_id = document.getElementById("hoa_edit_id").value;
+                                            console.log(delete_id);
+                                            
+                                        }
+                                        function edithoa(){
+                                            
+                                            document.getElementById("hoa_edit_id").readonly = false;
+                                            document.getElementById("hoa_edit_fname").disabled = false;
+                                            document.getElementById("hoa_edit_lname").disabled = false;
+                                            document.getElementById("hoa_edit_tele").disabled = false;
+                                            document.getElementById("hoa_edit_cont").disabled = false;
+                                            document.getElementById("hoa_edit_email").disabled = false;
+                                            document.getElementById("hoa_edit_username").disabled = false;
+                                            document.getElementById("hoa_edit_password").disabled = false;
+                                            var p = document.getElementById('hoa_edit_password');
+                                            p.setAttribute('type', 'text');
+                                        }
+                                        
+                                        </script>
+                                
+                                   <!-- Confirmation pop up modal -->
+                                  
+                                        <!-- Modal -->
+                                        
+
+                                   <!-- confirmation popup modal end -->
+                            <!-- end modal -->
+                        </div>
+
+
+
+<!-- end sa settings -->
+                                </td>
+                                
+                            </tr>
+                            <?php } ?>
+                    </div>
+                    <!-- END SA HOAAAA -->
+
+                    <div id="add_hoa_modal" class="w3-modal">
+                                <div class="w3-modal-content w3-animate-bottom" style="width:20%;" >
+                                  <!-- start modal -->
+                                <div id="add_hoa_modal" class="modal-header w3-green">
+                                    <span onclick="closehoaaddmodal()" class="w3-button w3-display-topright">&times;</span>
+                                    <h4 class="modal-title ">Collector User Details</h4>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                    <?php 
+                                    $query_get_last_id = "select auto_increment from information_schema.tables where table_name = 'user' and table_schema = DATABASE();";
+                                    $query_run = mysqli_query($connection, $query_get_last_id);
+                                    $return_request_from_get_last_id = mysqli_num_rows($query_run) > 0;
+            
+                                    $last_id_value = 0;
+
+                                    while($row = mysqli_fetch_array($query_run)){
+                                        $last_id_value = (int)$row['auto_increment'];
+                                    }
+                                    ?>
+                                    <form method="post" id="addCollectorForm">
+                                    <p style ="color:red;" class="result_display" id="result_display"> </p>
+                                    <label>ID: <?php echo $last_id_value;?></label><input type="text" class="hoa_add_id" id="hoa_add_id" minlength="3" maxlength="50"
+                                name="hoa_add_id" value="<?php  $last_id_value;?>" value="DEFAULT_ID"
+                                style="pointer-events: none;cursor: default;border: none;width: 100%;font-size: 1.2rem;font-weight: normal;text-align: right;" />
+                                    <br>
+                                    
+                                   
+                                    <label>First Name</label><br>
+                                    <input type="text" class = "hoa_first_name" name="hoa_first_name"  id="hoa_first_name" style="border-radius:5px; width:100%; " required>
+                                    <br> 
+                                
+                                    <label>Last Name</label><br>
+                                    <input type="text" class = "hoa_last_name"  name="hoa_last_name"  id="hoa_last_name" style="border-radius:5px; width:100%; " required >
+                                    <br>
+                                    <label>Email</label><br>
+                                    <input type="text" name="hoa_email" class="hoa_email"   id="hoa_email" style="border-radius:5px; width:100%; " required>
+                                    <br>
+                                    <label>Telephone</label><br>
+                                    <input type="text" name="hoa_telephone"  class="hoa_telephone" id="hoa_telephone" style="border-radius:5px; width:100%; " required>
+                                    <br>
+                                    <label>Contact Number</label><br>
+                                    <input type="text" name="hoa_contact_number"  class="hoa_contact_number" id="hoa_contact_number" style="border-radius:5px; width:100%; " required>
+                                    <br>
+                                    <label>User Name</label><br>
+                                    <input type="text" name="hoa_name"  class="hoa_name" id="hoa_name" style="border-radius:5px; width:100%; " required>
+                                    <br>
+                                    <label>Password</label><br>
+                                    <input type="password" name="hoa_password"  class="hoa_password" id="hoa_password" style="border-radius:5px; width:100%; " required>
+                                    <br>
+                                    
+                        <br>
+                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" onclick="closehoaaddmodal()" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                                       
+                                        <input type="submit" value="Submit" name ="addhoabtn" id="addhoabtn" class="btn btn-primary" value="Add">
+                                        </form>
+
+                                      
+                                        <script>
+                                        function closehoaaddmodal(){
+                                            document.getElementById('add_hoa_modal').style.display="";
+                                            document.getElementById('hoa_first_name').value="";
+                                            document.getElementById('hoa_last_name').value="";
+                                            document.getElementById('hoa_email').value="";
+                                            document.getElementById('hoa_telephone').value="";
+                                            document.getElementById('hoa_contact_number').value="";
+                                            document.getElementById('hoa_name').value="";
+                                            document.getElementById('hoa_password').value="";
+
+                                        }
+                                            </script>
+                                    </div>
+                                  
+
+                            <!-- end modal -->
+                        </div>
     </section>
     <br>
     
 
                                     </div>
+                                    
 </body>
 
 
@@ -808,6 +1250,7 @@ function activatecollector(id){
                        <!-- end admin management -->
 
                       
+                       
                                 <!-- end container -->
                                 </div>
                             
@@ -1082,7 +1525,7 @@ function submitCollectorRecord() {
         
         
           //display loader
-          window.location.href = "functions/add_collector_user.php";
+          window.location.href = "admin_usermanagement.php";
        
       },
       error: function(data) {
@@ -1112,6 +1555,8 @@ btnColEdit.addEventListener('click', () => {
     document.getElementById("edit_collector_address").disabled = false;
     document.getElementById("edit_plate_number").disabled = false;
     document.getElementById("edit_collector_password").disabled = false;
+    document.getElementById("edit_collector_contact").disabled = false;
+    
   
     
     var p = document.getElementById('edit_collector_password');
@@ -1166,6 +1611,7 @@ function submitUpdateCollectorRecord(){
           edit_address: $("#edit_collector_address").val(), 
           edit_password: $("#edit_collector_password").val(), 
           edit_plate_number: $("#edit_plate_number").val(), 
+          edit_cont_number: $("#edit_collector_contact").val(), 
 
 
       },
@@ -1180,7 +1626,7 @@ function submitUpdateCollectorRecord(){
           console.log($("#edit_collector_address").val());
           console.log($("#edit_collector_password").val());
           console.log($("#edit_plate_number").val());
-       
+          console.log($("#edit_collector_contact").val());
           //display loader
           window.location.href = "admin_usermanagement.php";
        
@@ -1254,7 +1700,49 @@ function deletecollectorid(id){
          });
 }
     </script>
+
+<script>
+
+
+// let btnhoa = document.querySelector('#addhoabtn');
+// btnhoa.addEventListener('click', () => {
+    
+//     $.ajax({
+//             url: 'functions/add_hoa_user.php',
+//             type: 'POST',
+//             data: {
+
+//           hoa_first: $("#hoa_first_name").val(),
+//           hoa_last: $("#hoa_last_name").val(),
+//           email_hoa: $("#hoa_email").val(),
+//           tele_hoa: $("#hoa_telephone").val(), 
+ 
+                                                           
+//             },
+//             success: function(result) {
+         
+//             console.log("Successfully added a record.");
+//             console.log(hoa_first);
+                                                           
+//                                                             //display loader
+//             window.location.href = "admin_usermanagement.php";
+                                                        
+//             },
+//             error: function(data) {
+//              alert("error occured" + data); //===Show Error Message====
+
+//             }
+
+//          });
+
+
+   
+// });
+
+//     </script>
 </html> 
+
+
 
 
 
