@@ -1634,7 +1634,8 @@ function submitUpdateCollectorRecord(){
       error: function(data) {
           alert("error occured" + data); //===Show Error Message====
 
-      }
+      } 
+      
 
   });
 
