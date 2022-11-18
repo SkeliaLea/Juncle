@@ -12,7 +12,7 @@
                                             $user  =$_POST["hoa_name"];
                                             $pass  =$_POST["hoa_password"];
                                         
-                                            $query = "insert into user (user_last_name, user_first_name, user_email, user_phone, user_tel, username, password, status) values ('$firstname' , '$last' , '$email', '$cont', '$tele', '$user', '$pass','0')";
+                                            $query = "insert into user (user_last_name, user_first_name, user_email, user_phone, user_tel, username, password, user_status) values ('$firstname' , '$last' , '$email', '$cont', '$tele', '$user', '$pass','0')";
                                             $query_run = mysqli_query($connection, $query);
                                             header("Location: admin_usermanagement.php");
                                             
@@ -702,7 +702,7 @@ function activatecollector(id){
 
                             </tr>
                             <?php 
-                               $query = "select * from user where status != '2' ";
+                               $query = "select * from user where user_status != '2' ";
                                $query_run = mysqli_query($connection, $query);       
   
                           
@@ -717,12 +717,12 @@ function activatecollector(id){
                                 <td><?php echo $row['user_phone']; ?></td>
                                 <td><?php echo $row['user_tel']; ?></td>
                               
-                                <td><?php if ($row['status']  == 0){
+                                <td><?php if ($row['user_status']  == 0){
                                       ?> 
                                         <p style ="color:green;"> Activated </p>
                                       <?php 
                                     }
-                                    else if ($row['status'] == 1){
+                                    else if ($row['user_status'] == 1){
                                         ?> 
                                           <p style ="color:red;"> Suspended </p>
                                         <?php 
@@ -741,11 +741,11 @@ function activatecollector(id){
                         
                                 </div>
                                 <div style="flex:50%; ">
-                         <?php if($row['status']=='0'){?> 
+                         <?php if($row['user_status']=='0'){?> 
                           <button onclick="suspendhoa(<?php echo $row['user_id']; ?>)" class="w3-button w3-red btn-sm" style ="border-radius:5px;"> Suspend</button>
                     
                          
-                            <?php } else if($row['status']=='1') { ?>
+                            <?php } else if($row['user_status']=='1') { ?>
                           <button onclick="activatehoa(<?php echo $row['user_id'];?>)" class="w3-button w3-green btn-sm" style ="border-radius:5px;"> Activate</button>
                                 <?php } ?>
                                 
