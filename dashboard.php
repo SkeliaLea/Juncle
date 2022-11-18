@@ -92,6 +92,24 @@
                     </div>
                     <div class="col-sm">
                     <div class="card border-success mb-3" style="max-width: 18rem; ">
+                    <h5 class="card-header" style="background:#2E8B57 ;border-top-radius:20px; color:white; ">Total Number of Hired Collectors</h5>
+                        <div class="card-body text-success">
+                            <h5 class="card-title" style="text-align: center;">
+                            <?php 
+                                $query_get_collector = "select count(collector_id) as collector_count from collector where account_status = '1'";
+                                $query_run = mysqli_query($connection, $query_get_collector);
+                                $return_request_from_query_get_collector = mysqli_num_rows($query_run) > 0;
+
+                                while($row = mysqli_fetch_array($query_run)){
+                                echo $row['collector_count'];
+                                }
+                            ?>
+                            </h5>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                    <div class="card border-success mb-3" style="max-width: 18rem; ">
                     <h5 class="card-header" style="background:#2E8B57 ;border-top-radius:20px; color:white; ">Total Number of Booking Request</h5>
                         <div class="card-body text-success" style="text-align: center;">
                             <h5 class="card-title" style="text-align: center;">
