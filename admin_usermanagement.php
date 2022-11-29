@@ -614,7 +614,7 @@ max-length: 10;
                                         <button onclick="activatecollector('<?php echo $row['collector_id'];?>')" class="w3-button w3-green btn-sm" style ="border-radius:5px;">Activate</button> 
                                   <?php  } ?>
 
-                            </td>
+                            </td>  
                             <script>
 function suspend_collector(id){
    
