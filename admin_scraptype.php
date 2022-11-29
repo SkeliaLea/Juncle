@@ -158,7 +158,7 @@ g<?php
                                                  </form>
                                              </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-danger" id ="deletescrap" name ="deletescrap">Delete</button>
+                                                    <button class="btn btn-danger" onclick ="deletescrap(<?php echo $row['scrap_id']?>)">Delete</button>
                                                     <button class="btn btn-secondary" id ="editscrap" name ="editscrap">Confirm Edit</button>
                                                     <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                                 </div>
@@ -167,6 +167,70 @@ g<?php
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    
+                                    <!-- delete modal -->
+                                    <div class="modal" id="deletemodal2" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Delete User</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick ="closehoadelete()" >
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure to delete this user?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" onclick="confirmdeletescrap()">Delete</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick ="document.getElementById('deletemodal2').style.display='none';">Close</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    <!-- end delete modal -->
+                                
+                                            <script>
+                                                     function deletescrap(scrap_id){
+                                                        
+                                                
+                                                    document.getElementById('deletemodal2').style.display='block';
+                                                    
+                                                    // console.log(delete_id);
+
+                                                    }
+                                                    function confirmdeletescrap(){
+                                                        var deletescrap = document.getElementById("scrap_id").value;
+                                                        $.ajax({
+                                                            url: 'functions/delete_scrap.php',
+                                                            type: 'POST',
+                                                            data: {
+                                                                deleteid: deletescrap,
+                                                            
+                                                                                                                                    
+                                                            },
+                                                            
+                                                            success: function(result) {
+                                                            window.location.href = "admin_scraptype.php";
+                                                            console.log("Successfully added a record.");
+                                                            
+                                                                                        
+                                                        
+                                                                                                        
+                                                            },
+                                                            error: function(data) {
+                                                            alert("error occured" + data); //===Show Error Message====
+
+                                                            }
+
+                                                        });
+                                                        
+
+                                                    }
+                                                </script>
                     </td>
                 </tr>
                 
@@ -248,35 +312,35 @@ g<?php
 
                         });
                         
-                        let deletebtn = document.querySelector('#deletescrap');
-                        deletebtn.addEventListener('click', () => {
-                        //    alert($("#price_scrap").val(),);
-                            $.ajax({
-                                url: 'functions/delete_scrap.php',
-                                type: 'POST',
-                                data: {
-                                    deleteid: $(".scrap_id").val(),
+                        // let deletebtn = document.querySelector('#deletescrap');
+                        // deletebtn.addEventListener('click', () => {
+                        // //    alert($("#price_scrap").val(),);
+                        //     $.ajax({
+                        //         url: 'functions/delete_scrap.php',
+                        //         type: 'POST',
+                        //         data: {
+                        //             deleteid: $(".scrap_id").val(),
                                    
                                                                                                         
-                                },
+                        //         },
                                 
-                                success: function(result) {
-                                window.location.href = "admin_scraptype.php";
-                                console.log("Successfully added a record.");
+                        //         success: function(result) {
+                        //         window.location.href = "admin_scraptype.php";
+                        //         console.log("Successfully added a record.");
                                    
                                                               
                             
                                                                             
-                                },
-                                error: function(data) {
-                                alert("error occured" + data); //===Show Error Message====
+                        //         },
+                        //         error: function(data) {
+                        //         alert("error occured" + data); //===Show Error Message====
 
-                                }
+                        //         }
 
-                            });
+                        //     });
 
 
-                        });
+                        // });
                 </script>
 
                 
