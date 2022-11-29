@@ -64,6 +64,11 @@
     }
 }
 </script>
+<style>
+.number{
+max-length: 10;
+} 
+    </style>
 <script>
 
     checkUserIsSignedIn();
@@ -482,7 +487,7 @@
                                     <input type="text" name="edit_collector_address" id = "edit_collector_address" style = "width: 100%;" value = "" disabled>
                                     <br>
                                     <label>Contact Number</label><br>
-                                    <input type="text" name="edit_collector_contact" id = "edit_collector_contact" style = "width: 100%;" value = "" disabled>
+                                    <input type="number" class="number" name="edit_collector_contact" id = "edit_collector_contact" style = "width: 100%; maxlength:11;" value = "" style="maxlength:11;" minlength= "3" maxlength="11" size ="11" disabled>
                                     <br>
                                     <label>Plate Number</label><br>
                                     <input type="text" name="edit_plate_number" id = "edit_plate_number" style = "width: 100%;" value = "" disabled>
@@ -862,7 +867,7 @@ function activatecollector(id){
                                     <input type="text" name="hoa_edit_tele" id = "hoa_edit_tele" style = "width: 100%;"  value = ""  disabled>
                                     <br>
                                     <label>Contact Number</label><br>
-                                    <input type="text" name="hoa_edit_cont" id = "hoa_edit_cont" style = "width: 100%;"  value = ""  disabled>
+                                    <input type="number"  name="hoa_edit_cont" id = "hoa_edit_cont" style = "width: 100%;maxlength:11;"  value = "" minlength ="3" maxlength ="11" size="11"  disabled>
                                     <br>
                                     <label>Email Address</label><br>
                                     <input type="text" name="hoa_edit_email" id = "hoa_edit_email" style = "width: 100%;"  value = ""  disabled>
@@ -1028,7 +1033,7 @@ function activatecollector(id){
                                     <input type="text" name="hoa_telephone"  class="hoa_telephone" id="hoa_telephone" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     <label>Contact Number</label><br>
-                                    <input type="text" name="hoa_contact_number"  class="hoa_contact_number" id="hoa_contact_number" style="border-radius:5px; width:100%; " required>
+                                    <input type="number"  class="number" name="hoa_contact_number"  class="hoa_contact_number" id="hoa_contact_number" style="border-radius:5px; width:100%;maxlength:11; " minlength="3" maxlength="11" size="11" required>
                                     <br>
                                     <label>User Name</label><br>
                                     <input type="text" name="hoa_name"  class="hoa_name" id="hoa_name" style="border-radius:5px; width:100%; " required>
@@ -1207,7 +1212,7 @@ function activatecollector(id){
                                     <input type="text" name="add_collector_address"  class="add_collector_address" id="add_collector_address" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     <label>Contact Number</label><br>
-                                    <input type="text" name="add_collector_contact"  class="add_collector_contact" id="add_collector_contact" style="border-radius:5px; width:100%; " required>
+                                    <input type="number" name="add_collector_contact"  class="number add_collector_contact" id="add_collector_contact" style="border-radius:5px; width:100%; " minlength="3" maxlength="11" size="11" required>
                                     <br>
                                     <!-- <label>Password</label><br>
                                     <input type="password" name="password_collector"  class="password_collector" id="password_collector" style="border-radius:5px; width:100%; " required>
