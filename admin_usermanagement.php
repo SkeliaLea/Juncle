@@ -449,10 +449,10 @@ max-length: 10;
                                             document.getElementById("edit_collector_mname").disabled = true;
                                             document.getElementById("edit_collector_lname").disabled = true;
                                             document.getElementById("edit_collector_email").disabled = true;
-                                            document.getElementById("edit_collector_contact").disabled = true;
+                                            document.getElementById("collector_contact_edit").disabled = true;
                                             document.getElementById("edit_plate_number").disabled = true;
                                             document.getElementById("edit_collector_address").disabled = true;
-                                            document.getElementById("edit_collector_contact").disabled = true;
+                                           
                                             
                                             var pw = document.getElementById('edit_collector_password');
                                             pw.setAttribute('type', 'password');
@@ -487,7 +487,7 @@ max-length: 10;
                                     <input type="text" name="edit_collector_address" id = "edit_collector_address" style = "width: 100%;" value = "" disabled>
                                     <br>
                                     <label>Contact Number</label><br>
-                                    <input type="number" class="number" name="edit_collector_contact" id = "edit_collector_contact" style = "width: 100%; maxlength:11;" value = "" style="maxlength:11;" minlength= "3" maxlength="11" size ="11" disabled>
+                                    <input type="number" class="number" name="collector_contact_edit" id = "collector_contact_edit" style = "width: 100%; maxlength:11;" value = "" style="maxlength:11;" minlength= "3" maxlength="11" size ="11" disabled>
                                     <br>
                                     <label>Plate Number</label><br>
                                     <input type="text" name="edit_plate_number" id = "edit_plate_number" style = "width: 100%;" value = "" disabled>
@@ -588,7 +588,7 @@ max-length: 10;
 
 
                                    <button onclick="displaycollector('<?php echo $row['collector_id']?>' , '<?php echo $row['collector_firstname']?>', '<?php echo $row['collector_middlename']?>','<?php echo $row['collector_lastname']?>',
-                                   '<?php echo $row['collector_email']?>','<?php echo $row['collector_address']?>','<?php echo $row['plate_number']?>','<?php echo $row['password']?>' ,'<?php echo $row['password']?>', '<?php echo $row['contact_number']?>')" class="w3-button w3-green btn-sm" style ="border-radius:5px;">View Details</button> 
+                                   '<?php echo $row['collector_email']?>','<?php echo $row['collector_address']?>','<?php echo $row['plate_number']?>','<?php echo $row['password']?>', '<?php echo $row['contact_number']?>')" class="w3-button w3-green btn-sm" style ="border-radius:5px;">View Details</button> 
                                    <script>
                                     function displaycollector(id,fname,mname,lname,email, address, pnumber, pw,conta){
                                         document.getElementById('editcollectormodal').style.display='block';
@@ -603,7 +603,9 @@ max-length: 10;
                     
                                         document.getElementById("edit_plate_number").value = pnumber;
                                         document.getElementById("edit_collector_password").value = pw;
-                                        document.getElementById("edit_collector_contact").value = conta;
+                                        document.getElementById("collector_contact_edit").value = conta;
+
+                                        
 
                                     }
                                    </script>
@@ -614,7 +616,7 @@ max-length: 10;
                                         <button onclick="activatecollector('<?php echo $row['collector_id'];?>')" class="w3-button w3-green btn-sm" style ="border-radius:5px;">Activate</button> 
                                   <?php  } ?>
 
-                            </td>
+                            </td>  
                             <script>
 function suspend_collector(id){
    
@@ -1560,7 +1562,7 @@ btnColEdit.addEventListener('click', () => {
     document.getElementById("edit_collector_address").disabled = false;
     document.getElementById("edit_plate_number").disabled = false;
     document.getElementById("edit_collector_password").disabled = false;
-    document.getElementById("edit_collector_contact").disabled = false;
+    document.getElementById("collector_contact_edit").disabled = false;
     
   
     
@@ -1616,7 +1618,7 @@ function submitUpdateCollectorRecord(){
           edit_address: $("#edit_collector_address").val(), 
           edit_password: $("#edit_collector_password").val(), 
           edit_plate_number: $("#edit_plate_number").val(), 
-          edit_cont_number: $("#edit_collector_contact").val(), 
+          edit_cont_number: $("#collector_contact_edit").val(), 
 
 
       },
@@ -1631,7 +1633,7 @@ function submitUpdateCollectorRecord(){
           console.log($("#edit_collector_address").val());
           console.log($("#edit_collector_password").val());
           console.log($("#edit_plate_number").val());
-          console.log($("#edit_collector_contact").val());
+          console.log($("#collector_contact_edit").val());
           //display loader
           window.location.href = "admin_usermanagement.php";
        
