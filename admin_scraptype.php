@@ -312,35 +312,35 @@ g<?php
 
                         });
                         
-                        // let deletebtn = document.querySelector('#');
-                        // deletebtn.addEventListener('click', () => {
-                        // //    alert($("#price_scrap").val(),);
-                        //     $.ajax({
-                        //         url: 'functions/delete_scrap.php',
-                        //         type: 'POST',
-                        //         data: {
-                        //             deleteid: $(".scrap_id").val(),
+                        let deletebtn = document.querySelector('#');
+                        deletebtn.addEventListener('click', () => {
+                        //    alert($("#price_scrap").val(),);
+                            $.ajax({
+                                url: 'functions/delete_scrap.php',
+                                type: 'POST',
+                                data: {
+                                    deleteid: $(".scrap_id").val(),
                                    
                                                                                                         
-                        //         },
+                                },
                                 
-                        //         success: function(result) {
-                        //         window.location.href = "admin_scraptype.php";
-                        //         console.log("Successfully added a record.");
+                                success: function(result) {
+                                window.location.href = "admin_scraptype.php";
+                                console.log("Successfully added a record.");
                                    
                                                               
                             
                                                                             
-                        //         },
-                        //         error: function(data) {
-                        //         alert("error occured" + data); //===Show Error Message====
+                                },
+                                error: function(data) {
+                                alert("error occured" + data); //===Show Error Message====
 
-                        //         }
+                                }
 
-                        //     });
+                            });
 
 
-                        // });
+                        });
                 </script>
 
                 
