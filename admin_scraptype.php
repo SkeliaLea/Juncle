@@ -77,6 +77,16 @@ g<?php
                                
                            </div>
                            <br>
+                           <div style="display:flex; display:flex; padding-left:30px;">
+                               
+                               <label>Unit:  </label>
+                               <select id="add_unit" name = "add_unit" class ="add_unit" style="margin-left:82px; border-radius:5px; border-color:gray;">
+
+                                                            <option default>per kilo</option>
+                                                            <option>per piece</option>
+                                            </select> 
+                           </div>
+                           <br>
                            
                            <div style="display:flex; display:flex; padding-left:30px;">
                                
@@ -103,6 +113,7 @@ g<?php
                     <th scope="col">Scrap ID</th>
                     <th scope="col">Scrap Name</th>
                     <th scope="col">Scrap Price</th>
+                    <th scope="col">Unit</th>
                     <th scope="col">Price Update Date</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -123,11 +134,12 @@ g<?php
                     <td><?php echo $row['scrap_id'];?></td>
                     <td><?php echo $row['scrap_name'];?></td>
                     <td><?php echo $row['scrap_price'];?></td>
+                    <td><?php echo $row['units'];?></td>
                     <td><?php echo $row['price_update_date'];?></td>
                     <td>
                     <div class="w3-container">
                             <button data-target="#scrap_type_modal" onclick="display_data('<?php echo $row['scrap_id']?>',
-                            '<?php echo $row['scrap_name']?>','<?php echo $row['scrap_price']?>','<?php echo $row['price_update_date']?>')" data-toggle="modal" class="w3-button w3-green">Update Details</button>
+                            '<?php echo $row['scrap_name']?>','<?php echo $row['scrap_price']?>','<?php echo $row['price_update_date']?>', '<?php echo $row['units'];?>')" data-toggle="modal" class="w3-button w3-green">Update Details</button>
                             <div class="modal fade center" id="scrap_type_modal">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -152,6 +164,14 @@ g<?php
                                                         <input type="text" id="edit_price_scrap" class ="edit_price_scrap" name ="edit_price_scrap">
                                                     </div>
                                                     <div>
+                                                        <label for="scrap_price" class="col-form-label">Unit:</label>
+                                                        <select id="edit_unit" name = "edit_unit" class ="edit_unit" style="margin-left:48px;">
+
+                                                            <option value="per kilo" default>per kilo</option>
+                                                            <option value ="per piece">per piece</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
                                                         <label for="price_update_date" class="col-form-label">Price Update Date</label>
                                                         <input type="text" id="edit_price_update_date" class ="edit_price_update_date" name ="edit_price_update_date">
                                                     </div>
@@ -162,6 +182,8 @@ g<?php
                                                     <button class="btn btn-secondary" id ="editscrap" name ="editscrap">Confirm Edit</button>
                                                     <button class="btn btn-primary" data-dismiss="modal">Cancel</button>
                                                 </div>
+
+                                               
                                             
 
                                             </div>
@@ -175,11 +197,24 @@ g<?php
             }
                 ?>
                <script>
-                    function display_data(scrap_id, scrap_name, scrap_price, price_update_date){
+                    function display_data(scrap_id, scrap_name, scrap_price, price_update_date, unitscrap){
+
+                        var scrap_unit_options = document.getElementById('edit_unit').options;
+
                         document.getElementById('scrap_id').value = scrap_id;
                         document.getElementById('edit_crap_name').value = scrap_name;
                         document.getElementById('edit_price_scrap').value = scrap_price;
                         document.getElementById('edit_price_update_date').value = price_update_date;
+
+                        for (let k = 0; scrap_unit_options.length; k++) {
+                            if (scrap_unit_options[k].value == unitscrap) {
+                                document.getElementById("edit_unit").value = scrap_unit_options[k].value;
+                             
+
+                                break;
+                            }
+                        }
+    
                     }
 
                     
@@ -194,6 +229,7 @@ g<?php
                                     scrapname: $("#name_scrap").val(),
                                     scrapprice: $("#price_scrap").val(),
                                     scrapupdatedate: $("#date_scrap").val(),
+                                    scrapunit: $("#add_unit").val(),
                                                                                                         
                                 },
                                 success: function(result) {
@@ -225,6 +261,7 @@ g<?php
                                     namescrap: $(".edit_crap_name").val(),
                                     pricescrap: $(".edit_price_scrap").val(),
                                     scrapupdatedatee: $(".edit_price_update_date").val(),
+                                    unitofscrap: $(".edit_unit").val(),
                                                                                                         
                                 },
                                 
@@ -277,6 +314,8 @@ g<?php
 
 
                         });
+
+                        
                 </script>
 
                 
