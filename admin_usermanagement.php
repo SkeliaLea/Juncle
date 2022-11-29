@@ -605,6 +605,8 @@ max-length: 10;
                                         document.getElementById("edit_collector_password").value = pw;
                                         document.getElementById("collector_contact_edit").value = conta;
 
+                                        
+
                                     }
                                    </script>
                                    <?php if($row['account_status']=='1'){ ?>
