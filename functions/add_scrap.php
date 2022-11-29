@@ -4,7 +4,8 @@ require '../database.php';
 $post_params_field_array = array(
     "scrapname",//0
     "scrapprice", //1
-    "scrapupdatedate"//2
+    "scrapupdatedate",//2
+    "scrapunit"
     );
     ?>
 <script>
@@ -28,7 +29,7 @@ for($i = 0;$i < sizeof($post_params_field_array); $i++){
 
 
 
-$query_push_scrap = "insert into scrap_type(scrap_name, scrap_price, price_update_date) values ('".$post_params_field_array_data_value[0]. "', '".$post_params_field_array_data_value[1]."', '".$post_params_field_array_data_value[2]."')";
+$query_push_scrap = "insert into scrap_type(scrap_name, scrap_price, price_update_date, units) values ('".$post_params_field_array_data_value[0]. "', '".$post_params_field_array_data_value[1]."', '".$post_params_field_array_data_value[2]."', '".$post_params_field_array_data_value[3]."')";
 
 $query_run = mysqli_query($connection, $query_push_scrap);
 // header("Location: admin_scraptype.php");

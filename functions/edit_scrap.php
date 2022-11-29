@@ -5,7 +5,8 @@ $post_params_field_array = array(
     "namescrap",//0
     "pricescrap", //1
     "scrapupdatedatee",//2
-    "scrapid"
+    "scrapid",//3
+    "unitofscrap"//4
     );
     ?>
 <script>
@@ -29,7 +30,7 @@ for($i = 0;$i < sizeof($post_params_field_array); $i++){
 
 
 
-$query_push_scrap = "UPDATE scrap_type set scrap_name = '".$post_params_field_array_data_value[0]."', scrap_price = '".$post_params_field_array_data_value[1]."', price_update_date = CURDATE() where scrap_id ='".$post_params_field_array_data_value[3]."' ";
+$query_push_scrap = "UPDATE scrap_type set units = '".$post_params_field_array_data_value[4]."', scrap_name = '".$post_params_field_array_data_value[0]."', scrap_price = '".$post_params_field_array_data_value[1]."', price_update_date = CURDATE() where scrap_id ='".$post_params_field_array_data_value[3]."' ";
 
 $query_run = mysqli_query($connection, $query_push_scrap);
 // header("Location: admin_scraptype.php");
