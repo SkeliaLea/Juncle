@@ -251,20 +251,20 @@ max-length: 10;
                                     <br>
                             
                                     <label>First Name</label><br>
-                                    <input type="text" name="edit_fname" id = "edit_fname" style = "width: 100%;"  value = "" disabled>
+                                    <input type="text" name="edit_fname" id = "edit_fname" maxlength="30" style = "width: 100%;"  value = "" disabled>
                                     <br>
                                     <label>Last Name</label><br>
-                                    <input type="text" name="edit_lname" id = "edit_lname" style = "width: 100%;" value = "" style="border-radius:5px; width:100%; " disabled>
+                                    <input type="text" name="edit_lname" maxlength="30" id = "edit_lname" style = "width: 100%;" value = "" style="border-radius:5px; width:100%; " disabled>
                                    
                                     <br>
                                     <label>Email Address</label><br>
-                                    <input type="text" name="edit_email" id = "edit_email" style = "width: 100%;"  value = ""  disabled>
+                                    <input type="text" name="edit_email" maxlength="50" id = "edit_email" style = "width: 100%;"  value = ""  disabled>
                                     <br>
                                     <label>Username</label><br>
-                                    <input type="text" name="edit_username" id = "edit_username" style = "width: 100%;" value = "" disabled>
+                                    <input type="text" name="edit_username" maxlength="20" id = "edit_username" style = "width: 100%;" value = "" disabled>
                                     <br>
                                     <label>Password</label><br>
-                                    <input type="password" name="edit_password" id = "edit_password" style = "width: 100%;" value = ""  disabled>
+                                    <input type="password" name="edit_password" minlength="8" maxlength="16" id = "edit_password" style = "width: 100%;" value = ""  disabled>
                                     <br>
                                     <!-- e add pani -->
                              
@@ -470,30 +470,30 @@ max-length: 10;
                                     
                                     <br>
                                     <label>First Name</label><br>
-                                    <input type="text" name="edit_collector_fname" id = "edit_collector_fname" style = "width: 100%;"  value = "" disabled>
+                                    <input type="text" name="edit_collector_fname" maxlength="40" id = "edit_collector_fname" style = "width: 100%;"  value = "" disabled>
                                     <br>
                                  
                                     <label>Middle Name</label><br>
-                                    <input type="text" name="edit_collector_mname" id = "edit_collector_mname" style = "width: 100%;"  value = "" disabled>
+                                    <input type="text" name="edit_collector_mname" maxlength="30" id = "edit_collector_mname" style = "width: 100%;"  value = "" disabled>
                                     <br>
                                     <label>Last Name</label><br>
-                                    <input type="text" name="edit_collector_lname" id = "edit_collector_lname" style = "width: 100%;" value = "" style="border-radius:5px; width:100%; " disabled>
+                                    <input type="text" name="edit_collector_lname" maxlength="30" id = "edit_collector_lname" style = "width: 100%;" value = "" style="border-radius:5px; width:100%; " disabled>
                                    
                                     <br>
                                     <label>Email Address</label><br>
-                                    <input type="text" name="edit_collector_email" id = "edit_collector_email" style = "width: 100%;"  value = ""  disabled>
+                                    <input type="text" name="edit_collector_email" maxlength="50" id = "edit_collector_email" style = "width: 100%;"  value = ""  disabled>
                                     <br>
                                     <label>Address</label><br>
-                                    <input type="text" name="edit_collector_address" id = "edit_collector_address" style = "width: 100%;" value = "" disabled>
+                                    <input type="text" name="edit_collector_address" maxlength="60" id = "edit_collector_address" style = "width: 100%;" value = "" disabled>
                                     <br>
                                     <label>Contact Number</label><br>
-                                    <input type="number" class="number" name="collector_contact_edit" id = "collector_contact_edit" style = "width: 100%; maxlength:11;" value = "" style="maxlength:11;" minlength= "3" maxlength="11" size ="11" disabled>
+                                    <input type="number" class="number" name="collector_contact_edit" id = "collector_contact_edit" style = "width: 100%;" value = "" minlength= "3" maxlength="11" size ="11" disabled>
                                     <br>
                                     <label>Plate Number</label><br>
-                                    <input type="text" name="edit_plate_number" id = "edit_plate_number" style = "width: 100%;" value = "" disabled>
+                                    <input type="text" name="edit_plate_number" id = "edit_plate_number" maxlength="4" style = "width: 100%;" value = "" disabled>
                                     <br>
                                     <label>Password</label><br>
-                                    <input type="password" name="edit_collector_password" id = "edit_collector_password" style = "width: 100%;"   disabled>
+                                    <input type="password" name="edit_collector_password" minlength ="8" maxlength="20" id = "edit_collector_password" style = "width: 100%;"   disabled>
                                     <br>
                                     <!-- e add pani -->
                              
@@ -860,25 +860,25 @@ function activatecollector(id){
                                     <br>
                             
                                     <label>First Name</label><br>
-                                    <input type="text" name="hoa_edit_fname" id = "hoa_edit_fname" style = "width: 100%;"  value = "" disabled>
+                                    <input type="text" name="hoa_edit_fname" maxlength="50" id = "hoa_edit_fname" style = "width: 100%;"  value = "" disabled>
                                     <br>
                                     <label>Last Name</label><br>
-                                    <input type="text" name="hoa_edit_lname" id = "hoa_edit_lname" style = "width: 100%;" value = "" style="border-radius:5px; width:100%; " disabled>
+                                    <input type="text" name="hoa_edit_lname" maxlength="50" id = "hoa_edit_lname" style = "width: 100%;" value = "" style="border-radius:5px; width:100%; " disabled>
                                     <br>
                                     <label>Telephone</label><br>
-                                    <input type="text" name="hoa_edit_tele" id = "hoa_edit_tele" style = "width: 100%;"  value = ""  disabled>
+                                    <input type="text" name="hoa_edit_tele" id = "hoa_edit_tele" maxlength="7" style = "width: 100%;"  value = ""  disabled>
                                     <br>
                                     <label>Contact Number</label><br>
-                                    <input type="number"  name="hoa_edit_cont" id = "hoa_edit_cont" style = "width: 100%;maxlength:11;"  value = "" minlength ="3" maxlength ="11" size="11"  disabled>
+                                    <input type="number"  name="hoa_edit_cont" id = "hoa_edit_cont" style = "width: 100%;"  value = "" maxlength ="11" size="11"  disabled>
                                     <br>
                                     <label>Email Address</label><br>
-                                    <input type="text" name="hoa_edit_email" id = "hoa_edit_email" style = "width: 100%;"  value = ""  disabled>
+                                    <input type="text" name="hoa_edit_email" maxlength="50"  id = "hoa_edit_email" style = "width: 100%;"  value = ""  disabled>
                                     <br>
                                     <label>Username</label><br>
-                                    <input type="text" name="hoa_edit_username" id = "hoa_edit_username" style = "width: 100%;" value = "" disabled>
+                                    <input type="text" name="hoa_edit_username" maxlength="30" id = "hoa_edit_username" style = "width: 100%;" value = "" disabled>
                                     <br>
                                     <label>Password</label><br>
-                                    <input type="password" name="hoa_edit_password" id = "hoa_edit_password" style = "width: 100%;" value = ""  disabled>
+                                    <input type="password" name="hoa_edit_password" maxlength="20" id = "hoa_edit_password" style = "width: 100%;" value = ""  disabled>
                                     <br>
                                     <!-- e add pani -->
                              
@@ -1022,26 +1022,26 @@ function activatecollector(id){
                                     
                                    
                                     <label>First Name</label><br>
-                                    <input type="text" class = "hoa_first_name" name="hoa_first_name"  id="hoa_first_name" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" class = "hoa_first_name" name="hoa_first_name"  maxlength="50" id="hoa_first_name" style="border-radius:5px; width:100%; " required>
                                     <br> 
                                 
                                     <label>Last Name</label><br>
-                                    <input type="text" class = "hoa_last_name"  name="hoa_last_name"  id="hoa_last_name" style="border-radius:5px; width:100%; " required >
+                                    <input type="text" class = "hoa_last_name"  name="hoa_last_name" maxlength="50"  id="hoa_last_name" style="border-radius:5px; width:100%; " required >
                                     <br>
                                     <label>Email</label><br>
-                                    <input type="text" name="hoa_email" class="hoa_email"   id="hoa_email" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" name="hoa_email" class="hoa_email" maxlength="50" id="hoa_email" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     <label>Telephone</label><br>
-                                    <input type="text" name="hoa_telephone"  class="hoa_telephone" id="hoa_telephone" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" name="hoa_telephone" class="hoa_telephone" id="hoa_telephone" maxlength="7" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     <label>Contact Number</label><br>
-                                    <input type="number"  class="number" name="hoa_contact_number"  class="hoa_contact_number" id="hoa_contact_number" style="border-radius:5px; width:100%;maxlength:11; " minlength="3" maxlength="11" size="11" required>
+                                    <input type="number"  class="number" name="hoa_contact_number"  class="hoa_contact_number" id="hoa_contact_number" style="border-radius:5px; width:100%;" maxlength="11" size="11" required>
                                     <br>
                                     <label>User Name</label><br>
-                                    <input type="text" name="hoa_name"  class="hoa_name" id="hoa_name" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" name="hoa_name"  class="hoa_name"  maxlength="30" id="hoa_name" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     <label>Password</label><br>
-                                    <input type="password" name="hoa_password"  class="hoa_password" id="hoa_password" style="border-radius:5px; width:100%; " required>
+                                    <input type="password" name="hoa_password"  maxlength="20" class="hoa_password" id="hoa_password" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     
                         <br>
@@ -1117,19 +1117,19 @@ function activatecollector(id){
                                     
                                    
                                     <label>First Name</label><br>
-                                    <input type="text" class = "add_fname" name="add_fname"  id="add_fname" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" class = "add_fname" name="add_fname" maxlength="50"  id="add_fname" style="border-radius:5px; width:100%; " required>
                                     <br> 
                                     <label>Last Name</label><br>
-                                    <input type="text" class = "add_lname"  name="add_lname"  id="add_lname" style="border-radius:5px; width:100%; " required >
+                                    <input type="text" class = "add_lname"  name="add_lname" maxlength="50"  id="add_lname" style="border-radius:5px; width:100%; " required >
                                     <br>
                                     <label>Email Address</label><br>
-                                    <input type="text" name="add_email" class="add_email"   id="add_email" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" name="add_email" class="add_email" maxlength="50"   id="add_email" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     <label>Username</label><br>
-                                    <input type="text" name="add_username"  class="add_username" id="add_username" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" name="add_username"  class="add_username" maxlength="30"  id="add_username" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     <label>Password</label><br>
-                                    <input type="password" name="add_password"  class="add_password" id="add_password" style="border-radius:5px; width:100%; " required>
+                                    <input type="password" name="add_password" maxlength="20"  class="add_password" id="add_password" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     
                             
@@ -1199,22 +1199,22 @@ function activatecollector(id){
                                     
                                    
                                     <label>First Name</label><br>
-                                    <input type="text" class = "add_collector_fname" name="add_collector_fname"  id="add_collector_fname" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" class = "add_collector_fname" name="add_collector_fname" maxlength="50" id="add_collector_fname" style="border-radius:5px; width:100%; " required>
                                     <br> 
                                     <label>Middle Name</label><br>
-                                    <input type="text" class = "add_collector_mname" name="add_collector_mname"  id="add_collector_mname" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" class = "add_collector_mname" name="add_collector_mname" maxlength="30" id="add_collector_mname" style="border-radius:5px; width:100%; " required>
                                     <br> 
                                     <label>Last Name</label><br>
-                                    <input type="text" class = "add_collector_lname"  name="add_collector_lname"  id="add_collector_lname" style="border-radius:5px; width:100%; " required >
+                                    <input type="text" class = "add_collector_lname"  name="add_collector_lname" maxlength="50"  id="add_collector_lname" style="border-radius:5px; width:100%; " required >
                                     <br>
                                     <label>Email</label><br>
-                                    <input type="text" name="add_collector_email" class="add_collector_email"   id="add_collector_email" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" name="add_collector_email" class="add_collector_email" maxlength="50"  id="add_collector_email" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     <label>Address</label><br>
-                                    <input type="text" name="add_collector_address"  class="add_collector_address" id="add_collector_address" style="border-radius:5px; width:100%; " required>
+                                    <input type="text" name="add_collector_address"  class="add_collector_address" maxlength="50" id="add_collector_address" style="border-radius:5px; width:100%; " required>
                                     <br>
                                     <label>Contact Number</label><br>
-                                    <input type="number" name="add_collector_contact"  class="number add_collector_contact" id="add_collector_contact" style="border-radius:5px; width:100%; " minlength="3" maxlength="11" size="11" required>
+                                    <input type="number" name="add_collector_contact"  class="number add_collector_contact" id="add_collector_contact" style="border-radius:5px; width:100%; " maxlength="11" size="11" required>
                                     <br>
                                     <!-- <label>Password</label><br>
                                     <input type="password" name="password_collector"  class="password_collector" id="password_collector" style="border-radius:5px; width:100%; " required>
@@ -1708,7 +1708,13 @@ function deletecollectorid(id){
          });
 }
     </script>
-
+<script>
+    document.querySelectorAll('input[type="number"]').forEach(input =>{
+        input.oninput = () =>{
+            if(input.value.length > input.maxLength) input.value = input.value.slice(0, input.maxLength);
+        };
+    });
+</script>
 <script>
 
 
