@@ -521,8 +521,7 @@ max-length: 10;
                                                     <h4 class="modal-title">Delete Account</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p> Are you sure to delete account with ID:  </p>
-                                                    <input type ="text" value = "" name ="delete_id" id ="delete_id" style="border:none; padding-left:20px;" disabled>
+                                                    <p> Are you sure to delete account?</p>
                                                     <br>
                                                 <p>Do you wish to proceed?</p>
                                                 

@@ -39,7 +39,7 @@ console.log('Admin Value: ' + "<?php echo $_POST[(String)$post_params_field_arra
 
 
 $query_push_delete_admin = "UPDATE user
-SET status = '2' where user_id = '".$post_params_field_array_data_value[0]."'";
+SET user_status = '2' where user_id = '".$post_params_field_array_data_value[0]."'";
 
 $query_run = mysqli_query($connection, $query_push_delete_admin);
 header("Location: ../admin_usermanagement.php");
