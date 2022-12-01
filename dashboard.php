@@ -1,6 +1,6 @@
 <?php 
     require 'database.php'; 
-    session_start();
+    //session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +60,7 @@
                         <div class="card-body text-success">
                             <h5 class="card-title" style="text-align: center;">
                             <?php 
-                                $query_get_user = "select count(user_id) as user_count from user";
+                                $query_get_user = "select count(*) as user_count from user";
                                 $query_run = mysqli_query($connection, $query_get_user);
                                 $return_request_from_query_get_user = mysqli_num_rows($query_run) > 0;
 
@@ -168,14 +168,21 @@
                     <div class="card border-success mb-3" style="max-width: 18rem; ">
                     <h5 class="card-header" style="background:#2E8B57 ;border-top-radius:20px; color:white; ">Total Amount For Payment &nbsp;&nbsp;&nbsp;&nbsp;</h5>
                         <div class="card-body text-success">
-                            <h5 class="card-title" style="text-align: center;">₱
+                            <h5 class="card-title" style="text-align: center;">₱ 
                             <?php 
-                                $query_get_invoice= "select SUM(net_amount_due) as amount_count from invoice";
+                                $query_get_invoice= "select SUM(net_amount_due) as amount_count from invoice where payment_status != 1";
                                 $query_run = mysqli_query($connection, $query_get_invoice);
                                 $return_request_from_query_get_invoice = mysqli_num_rows($query_run) > 0;
 
                                 while($row = mysqli_fetch_array($query_run)){
-                                echo $row['amount_count'];
+                                    if($row['amount_count'] == 0){
+                                    echo "0.00";
+                                    }
+                                    else{
+                                       
+                                        echo $row['amount_count'];
+                                    }
+                                
                                 }
                             ?> 
                             </h5>   
@@ -196,6 +203,17 @@
 
                                     </div>
 </body>
+<script type="text/javascript">
+        $(document).ready(function() {
+                      $("#scrapWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                      $("#userWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                        $("#scheduleWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                        $("#dashboardWrap").addClass('active_nav_item').removeClass('inActive_nav_item');
+                        $("#rfWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                        $("#notifWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                    })
+
+</script>
 
 
 </html> 
