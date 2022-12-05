@@ -1,6 +1,6 @@
-g<?php 
+<?php 
     require 'database.php'; 
-    session_start();
+    //session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,14 +66,14 @@ g<?php
                             <div style="display:flex; padding-left:30px;">
                                
                                     <label>Scrap Name:  </label>
-                                    <input type="text" id="name_scrap" class="name_scrap" style="margin-left:30px; border-radius:5px; border-color:gray;">
+                                    <input type="text" id="name_scrap" class="name_scrap" style="margin-left:30px; border-radius:5px; border-color:gray;" maxlength="30">
                                     
                                 </div>
                                 <br>
                                 <div style="display:flex; display:flex; padding-left:30px;">
                                
                                <label>Scrap Price:  </label>
-                               <input type="text" id="price_scrap" class ="price_scrap" style="margin-left:37px; border-radius:5px; border-color:gray;">
+                               <input type="number" id="price_scrap" class ="price_scrap" style="margin-left:37px; border-radius:5px; border-color:gray;" maxlength="3">
                                
                            </div>
                            <br>
@@ -92,7 +92,17 @@ g<?php
                                
                                <label>Scrap Date:  </label>
                                <input type="date" id="date_scrap" class= "date_scrap" style="margin-left:37px; border-radius:5px; border-color:gray;">
-                               
+                               <script language="javascript">
+                                                var today = new Date();
+                                                var dd = String(today.getDate()).padStart(2, '0');
+                                                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                                                var yyyy = today.getFullYear();
+
+                                                today = yyyy + '-' + mm + '-' + dd;
+                                                $('#date_scrap').attr('min',today);
+                                                $('#edit-pickup-date').attr('min',today);
+                                                
+                                                </script>
                            </div>
                                 <div>
                             </div>  
@@ -173,7 +183,19 @@ g<?php
                                                     </div>
                                                     <div>
                                                         <label for="price_update_date" class="col-form-label">Price Update Date</label>
-                                                        <input type="text" id="edit_price_update_date" class ="edit_price_update_date" name ="edit_price_update_date">
+                                                        <input type="date" id="edit_price_update_date" class ="edit_price_update_date" name ="edit_price_update_date" >
+                                                   
+                                                        <script language="javascript">
+                                                            var today = new Date();
+                                                            var dd = String(today.getDate()).padStart(2, '0');
+                                                            var mm = String(today.getMonth() + 1).padStart(2, '0');
+                                                            var yyyy = today.getFullYear();
+
+                                                            today = yyyy + '-' + mm + '-' + dd;
+                                                            $('#edit_price_update_date').attr('min',today);
+                                                            $('#edit-pickup-date').attr('min',today);
+                                                            
+                                                        </script>
                                                     </div>
                                                  </form>
                                              </div>
@@ -261,6 +283,9 @@ g<?php
             }
                 ?>
                <script>
+
+        
+
                     function display_data(scrap_id, scrap_name, scrap_price, price_update_date, unitscrap){
 
                         var scrap_unit_options = document.getElementById('edit_unit').options;
@@ -316,7 +341,7 @@ g<?php
 
                         let editbtn = document.querySelector('#editscrap');
                         editbtn.addEventListener('click', () => {
-                        //    alert($("#price_scrap").val(),);
+                            alert($(".edit_price_update_date").val(),);
                             $.ajax({
                                 url: 'functions/edit_scrap.php',
                                 type: 'POST',
@@ -324,7 +349,7 @@ g<?php
                                     scrapid: $(".scrap_id").val(),
                                     namescrap: $(".edit_crap_name").val(),
                                     pricescrap: $(".edit_price_scrap").val(),
-                                    scrapupdatedatee: $(".edit_price_update_date").val(),
+                                    scrapupdatedate: $(".edit_price_update_date").val(),
                                     unitofscrap: $(".edit_unit").val(),
                                                                                                         
                                 },
@@ -392,6 +417,21 @@ g<?php
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
+        $(document).ready(function() {
+            $("#scrapWrap").addClass('active_nav_item').removeClass('inActive_nav_item');
+                      $("#userWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                        $("#scheduleWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                        $("#dashboardWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                        $("#rfWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                        $("#notifWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                    })
 
+</script>
+<script>
+    document.querySelectorAll('input[type="number"]').forEach(input =>{
+        input.oninput = () =>{
+            if(input.value.length > input.maxLength) input.value = input.value.slice(0, input.maxLength);
+        };
+    });
 </script>
 </html>

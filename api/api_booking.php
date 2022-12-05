@@ -1,5 +1,5 @@
 <?php
-    include($_SERVER['DOCUMENT_ROOT'].'/Juncle/Juncle/database.php');
+    include($_SERVER['DOCUMENT_ROOT'].'/adminjuncle/Juncle/database.php');
     $actionID = $_POST['actionID'];
 
     if($actionID == 1) {
@@ -53,7 +53,7 @@
         $resultArray['schedule_id'] = $returnData['schedule_id'];
         $resultArray['collector_firstname'] = $returnData['collector_firstname'];
         $resultArray['collector_lastname'] = $returnData['collector_lastname'];
-        $resultArray['collector_image'] = base64_encode($returnData['collector_image']);
+        $resultArray['collector_image'] = $returnData['collector_image'];
         $resultArray['location'] = $returnData['location'];
         $resultArray['landmark'] = $returnData['landmark'];
         $resultArray['booking_status'] = $returnData['booking_status'];
@@ -110,9 +110,12 @@
         $invoiceId = $_POST["invoiceId"];
 
         $updateBookingStatus = "UPDATE booking SET booking_status = 3 WHERE booking_id = '".$bookingId."'";
+    $updateInvoicePaymentStatus = "UPDATE invoice SET payment_status = 1 WHERE booking_id ='" . $bookingId . "'";
         $insertPayment = "INSERT INTO payment (invoice_id, date_of_payment) VALUES ('".$invoiceId."', now())";
 
+        
         mysqli_query($connection, $updateBookingStatus);
+        mysqli_query($connection, $updateInvoicePaymentStatus);
         mysqli_query($connection, $insertPayment);
 
     }

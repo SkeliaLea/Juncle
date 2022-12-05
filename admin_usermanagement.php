@@ -1,6 +1,6 @@
 <?php 
     require 'database.php'; 
-    session_start();
+    //session_start();
 
     if(isset($_POST["addhoabtn"]))
                                             {
@@ -521,7 +521,8 @@ max-length: 10;
                                                     <h4 class="modal-title">Delete Account</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p> Are you sure to delete account?</p>
+                                                    <p> Are you sure to delete account with ID:  </p>
+                                                    <input type ="text" value = "" name ="delete_id" id ="delete_id" style="border:none; padding-left:20px;" disabled>
                                                     <br>
                                                 <p>Do you wish to proceed?</p>
                                                 
@@ -887,7 +888,7 @@ function activatecollector(id){
                        
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" onclick ="deletehoa()" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                                        <button type="button" onclick ="deletehoa()" class="btn btn-danger" data-bs-dismiss="modal">Terminate</button>
                                         <button type="button" onclick ="edithoa()" name="edit" id="edit" class="btn btn-secondary">Edit</button>
                                         <input type="submit" value="Confirm" name= "btnhoaupdate" id="btnhoaupdate" class="btn btn-primary">
                                         </form>
@@ -1714,7 +1715,18 @@ function deletecollectorid(id){
         };
     });
 </script>
-<script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            $("#scrapWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                      $("#userWrap").addClass('active_nav_item').removeClass('inActive_nav_item');
+                        $("#scheduleWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                        $("#dashboardWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                        $("#rfWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                        $("#notifWrap").addClass('inActive_nav_item').removeClass('active_nav_item');
+                    })
+
+</script>
+<script >
 
 
 // let btnhoa = document.querySelector('#addhoabtn');

@@ -118,6 +118,9 @@ input[type=number] {
 .column-display-wrapper {
     height: 89vh;
 }
+.column-display-wrapper-2{
+    height: 100%;
+}
 /* Main body end */
 
 

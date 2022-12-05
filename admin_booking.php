@@ -147,7 +147,7 @@
                                                 <div class="d-flex justify-content-between">
                                                     <div class="booking-user-profile d-flex">
                                                         <div class="mb-4 me-2">
-                                                            <img class="user-image me-1" src="data:image/jpeg;base64,'.base64_encode($bookingEntity['user_image']).'">
+                                                            <img class="user-image me-1" src="data:image/jpeg;base64,'.$bookingEntity['user_image'].'">
                                                         </div>
                                                         <div>
                                                             <p class="fs-7 fw-bold mb-0">'.$bookingEntity['user_first_name']." ".$bookingEntity['user_last_name'].'</p>
@@ -182,14 +182,7 @@
                                                             '.getTotalWeightOfScrapPerBooking($bookingEntity['booking_id'], $connection).'
                                                         </p>
                                                     </div>
-                                                    <div class="scrap-wrapper d-flex justify-content-between align-items-center">
-                                                        <p class="label-text fw-bold mb-0">
-                                                            Scrap :
-                                                        </p>
-                                                        <p class="ms-2 mb-0 info-value">
-                                                            '.$bookingEntity['scrap_type'].'
-                                                        </p>
-                                                    </div>
+                                                    
                                                 </div>
                                                 
                                             </div>
@@ -227,9 +220,9 @@
                             
                         </p>
                     </div>
-                    <div class="rounded item-image-wrapper my-3">
+                    <!-- <div class="rounded item-image-wrapper my-3">
                         <img src="" alt="" id="booking_image">
-                    </div>
+                    </div> -->
                     <div class="creator-wrapper mt-2 d-flex align-items-center">
                         <p class="label-text fw-bold mb-0 text-sm col-4">
                             Created by :
@@ -278,7 +271,7 @@
                             Collector assigned :
                     </p>
                     <div class="mb-4 me-2 d-flex align-items-center">
-                        <img class="user-image me-3" id="collector_image">
+                        <!-- <img class="user-image me-3" id="collector_image"> -->
                         <p class="collector_name text-sm mb-0 info-value"></p>
                     </div>
                     <div class="scrap-item-wrapper mt-3 d-flex row">
@@ -298,14 +291,14 @@
                         </div>
                         <div class = "weight-ledger-container mt-2 w-100">
                         </div>
-                        
+<!--                         
                         <div class="price-wrapper mt-2 d-flex align-items-center justify-content-between">
                             <p class="label-text fw-bold mb-0 text-sm col-4">
                                 Service fee :
                             </p>
                             <p class="fw-bold info-value ms-2 mb-0 text-sm col-6 text-end me-3" id="service_fee">
                             </p>
-                        </div>
+                        </div> -->
                         <div class="price-wrapper mt-2 d-flex align-items-center justify-content-between">
                             <p class="label-text fw-bold mb-0 text-sm col-4">
                                 Application fee :
@@ -487,20 +480,20 @@
             }
 
             // Content board image display
-            if(key === "booking_image" && value != null) {
-                document.getElementById('booking_image').src = 'data:image/jpeg;base64,' + value;
-            }
-            if(key === "booking_image" && value == null) {
-                $("#booking_image").attr("src", "assets/No_Image_Available.svg");
-            }
+            // if(key === "booking_image" && value != null) {
+            //     document.getElementById('booking_image').src = 'data:image/jpeg;base64,' + value;
+            // }
+            // if(key === "booking_image" && value == null) {
+            //     $("#booking_image").attr("src", "assets/No_Image_Available.svg");
+            // }
 
             // content board collector image display
-            if(key === "collector_image" && value != "") {
-                document.getElementById('collector_image').src = 'data:image/jpeg;base64,' + value;
-            } 
-            if(key === "collector_image" && (value == "" || value == null)) {
-                document.getElementById('collector_image').src = '';
-            }
+            // if(key === "collector_image" && value != "") {
+            //     document.getElementById('collector_image').src = 'data:image/jpeg;base64,' + value;
+            // } 
+            // if(key === "collector_image" && (value == "" || value == null)) {
+            //     document.getElementById('collector_image').src = '';
+            // }
 
             // Content board status display
             if(key === "booking_status") {
@@ -557,9 +550,9 @@
             if(key === "application_fee") {
                 document.getElementById(key).innerHTML = "P "+value;
             }
-            if(key === "service_fee") {
-                document.getElementById(key).innerHTML = "P "+value;
-            }
+            // if(key === "service_fee") {
+            //     document.getElementById(key).innerHTML = "P "+value;
+            // }
             if(key === "net_amount_due") {
                 document.getElementById(key).innerHTML = "P "+value;
             }
