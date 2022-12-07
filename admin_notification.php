@@ -1,6 +1,6 @@
-g<?php 
+<?php 
     require 'database.php'; 
-    session_start();
+    //session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">

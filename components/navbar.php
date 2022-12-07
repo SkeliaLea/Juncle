@@ -8,11 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-    <section class="navbar_section" style="height:1000px;">
+    <section class="navbar_section" style="height:100%;">
         <div class="w-100 nav_bar mt-4" id="nav_bar">
             <ul class="nav_items_wrapper p-0">
                 <li class="nav_item" id="dashboardWrap">
-                    <a href="" class="nav-link">
+                    <a href="../Juncle/dashboard.php" class="nav-link">
                         <div class="nav-item-content d-flex align-items-center ps-2">
                             <i class="bi bi-bar-chart-line"></i><p class="ms-3 mb-0">Dashboard</p>
                         </div>
@@ -26,28 +26,35 @@
                     </a>
                 </li>
                 <li class="nav_item" id="scheduleWrap">
-                    <a href="" class="nav-link">
+                    <a href="../Juncle/admin_schedule_management.php" class="nav-link">
                         <div class="nav-item-content d-flex align-items-center ps-2">
                             <i class="bi bi-calendar-week"></i><p class="ms-3 mb-0">Schedule</p>
                         </div>
                     </a>
                 </li>
                 <li class="nav_item" id="userWrap">
-                    <a href="" class="nav-link" >
+                    <a href="../Juncle/admin_usermanagement.php" class="nav-link" >
                         <div class="nav-item-content d-flex align-items-center ps-2">
                             <i class="bi bi-people"></i><p id="sample" class="sample ms-3 mb-0">User Management</p>
                         </div>
                     </a>
                 </li>
+                <li class="nav_item" id="scrapWrap">
+                    <a href="../Juncle/admin_scraptype.php" class="nav-link" >
+                        <div class="nav-item-content d-flex align-items-center ps-2">
+                            <i class="bi bi-people"></i><p id="sample" class="sample ms-3 mb-0">Scrap Type Management</p>
+                        </div>
+                    </a>
+                </li>
                 <li class="nav_item" id="rfWrap">
-                    <a href="" class="nav-link">
+                    <a href="../Juncle/admin_feedback.php" class="nav-link">
                         <div class="nav-item-content d-flex align-items-center ps-2">
                             <i class="bi bi-flag"></i><p class="ms-3 mb-0">Report and Feedback</p>
                         </div>
                     </a>
                 </li>
                 <li class="nav_item" id="notifWrap">
-                    <a href="" class="nav-link">
+                    <a href="../Juncle/admin_notification.php" class="nav-link">
                         <div class="nav-item-content d-flex align-items-center ps-2">
                             <i class="bi bi-bell"></i><p class="ms-3 mb-0">Notification</p>
                         </div>
@@ -71,6 +78,7 @@
             $("#rfWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
             $("#notifWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
             $("#bookingWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#scrapWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
         })
 
         $("#scheduleWrap").click(function(){
@@ -80,9 +88,19 @@
             $("#rfWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
             $("#notifWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
             $("#bookingWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#scrapWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
         })
 
         $("#userWrap").click(function(){
+            $(this).addClass('active_nav_item').removeClass('inActive_nav_item');
+            $("#dashboardWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#scheduleWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#rfWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#notifWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#bookingWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#scrapWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+        })
+        $("#scrapWrap").click(function(){
             $(this).addClass('active_nav_item').removeClass('inActive_nav_item');
             $("#dashboardWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
             $("#scheduleWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
@@ -116,6 +134,7 @@
             $("#userWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
             $("#rfWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
             $("#notifWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
+            $("#scrapWrap").addClass('inActive_nav_item').removeClass("active_nav_item");
         })
     }) 
     
