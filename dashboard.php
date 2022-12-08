@@ -412,7 +412,7 @@ while($data = mysqli_fetch_array($query3)){
                                             animationEnabled: true,
                                             //theme: "light2",
                                             title:{
-                                                text: "Total Payment per Area "
+                                                text: "Total Payment per Month "
                                             },
                                             axisX:{
                                                 crosshair: {
