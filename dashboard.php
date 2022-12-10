@@ -1,6 +1,5 @@
 <?php 
     require 'database.php'; 
-    require 'pdf/fpdf.php';
     //session_start();
 ?>
 <!DOCTYPE html>
@@ -50,7 +49,7 @@
             <div style="width:1000px">
            <div style="display:flex;" >
             <h1 class=" float-start section title" style="flex:50%;padding-left: 5px; position:block;">Dashboard</h1>
-            <button class="btn btn-secondary" style="height:40px;width:150px;padding-left: 5px; float:right; position:block" onclick = "location.href='generate_pdf.php'"> Generate PDF </button>
+            <button  style="height:40px;width:70px;padding-left: 5px; float:right; position:block"> Print </button>
     </div>
             <!-- start dashboard management -->
             <div class="container" style ="padding-top: 2%;">
@@ -306,39 +305,6 @@
   
  }
 
-
- $query3 = "SELECT 
- YEAR(date_of_payment) AS `Year`,
- monthname(date_of_payment) AS `Month`, 
- SUM(total_amount) AS `total`
-FROM 
- payment p, invoice i, booking b
-WHERE 
- p.invoice_id = i.invoice_id
-AND
- b.booking_id = i.booking_id
-AND
- b.booking_status = 3 -- check if ang booking is done na. meaning 'paid'
-GROUP BY 
- YEAR(date_of_payment), MONTH(date_of_payment)
-ORDER BY 
- YEAR(date_of_payment), MONTH(date_of_payment)";
-
-
-$query3 = mysqli_query($connection,$query3);
-
-if(mysqli_num_rows($query_run) > 0 ){
-$data2 = array();
-while($data = mysqli_fetch_array($query3)){
-
- array_push($data2, array("label"=> $data['Month'], "y"=> $data['total']),);
-
-}
-
-}
-
-
-
      
  ?>
  
@@ -408,35 +374,7 @@ while($data = mysqli_fetch_array($query3)){
                                         });
                                         chartychart.render();
                                         
-                                        var chartycharty = new CanvasJS.Chart("booklang", {
-                                            animationEnabled: true,
-                                            //theme: "light2",
-                                            title:{
-                                                text: "Total Payment per Month "
-                                            },
-                                            axisX:{
-                                                crosshair: {
-                                                    enabled: true,
-                                                    snapToDataPoint: true
-                                                }
-                                            },
-                                            axisY:{
-                                                title: "Total Payment",
-                                                includeZero: true,
-                                                crosshair: {
-                                                    enabled: true,
-                                                    snapToDataPoint: true
-                                                }
-                                            },
-                                            toolTip:{
-                                                enabled: false
-                                            },
-                                            data: [{
-                                                type: "column",
-                                                dataPoints: <?php echo json_encode($data2, JSON_NUMERIC_CHECK); ?>
-                                            }]
-                                        });
-                                        chartycharty.render();
+                                        
                                         } 
 </script>
 
@@ -450,9 +388,6 @@ while($data = mysqli_fetch_array($query3)){
 <br>
 
 <div id="areabook" style="height: 370px; width: 100%;"></div>
-<br>
-
-<div id="booklang" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </div>
                 </div>

@@ -25,8 +25,8 @@
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js" defer=""></script>
     <script src ='scripts/schedule.js' type="text/javascript"> </script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js" defer></script>
-
+    <script src ='scripts/googlemap.js' type="text/javascript"> </script>
+    <script src ='scripts/location.js' type="text/javascript"> </script>
 
 <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
     <style>
@@ -51,12 +51,16 @@
 <script>
     //checkUserIsSignedIn();
     </script>
+
+    
 <body class="body-background">
     
     <?php
         include('components/header.php');
-    ?>
+    ?>     
+
     <section class="main_container row wrapper">
+        
         <div class="col-2">
             <?php
                 include('components/navbar.php');
@@ -64,204 +68,352 @@
         </div>
         <div class="col-7">
             <div class="column-display-wrapper bg-white mx-1 my-2 w-100 p-3 rounded shadow-sm">
-                <h4 ~>Schedule Management</h4>
-                
-                    <div class="d-flex justify-content-between align-items-center mt-3">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule" type="button" role="tab" aria-controls="schedule" aria-selected="true">Schedule</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Location</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="schedule" role="tabpanel" aria-labelledby="schedule-tab">
+                            <h4 ~>Schedule Management</h4>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
 
-                    <div class="form-group">
-                        <div class="input-group">
-                        <span class="input-group-text" id="basic-addon1"><ion-icon name="search-outline"></ion-icon></span>
-                        <input type="text" name="search_text" id="search_text" placeholder="Search by Schedule Details" class="form-control" />
-                        </div>
-                    </div>
-                    
-                    <!-- TO AND FROM DATE FILTER  -->
-                    &nbsp;&nbsp;
-                            <div class="">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" name="From" id="From" class="form-control" placeholder="From Date"/>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" name="to" id="to" class="form-control" placeholder="To Date"/>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <br>                                     
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                            &nbsp;&nbsp;
-                            <ul class="booking-status-filter mb-0 d-inline-flex p-0 ">
-                                <input type="button" name="range" id="range" value="Filter" class="btn btn-success"/>
-                                &nbsp;&nbsp;
-                                <input type="button" name="reset" id="reset" value="Reset" class="btn btn-outline-warning btn-sm"/>
-                                &nbsp;&nbsp;
-                            </ul>
-                    <!-- END OF TO AND FROM DATE FILTER  -->
-
-                        <div class="d-flex align-items-center justify-content-between">
-                            <!-- The Modal -->
-                            <div class="modal fade" id="myModal">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Add Schedule</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body" >
-                                            <form class="form-inline" id="myForm" action="#">
-
-                                            <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="pickUpLocation" class="sr-only">Pick-up Location</label>
-                                                    <input type="text" class="form-control" id="pickupLocation" name="pick-up-location"  placeholder="Location" required>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1"><ion-icon name="search-outline"></ion-icon></span>
+                                                    <input type="text" name="search_text" id="search_text" placeholder="Search by Schedule Details" class="form-control" />
+                                                    </div>
                                                 </div>
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="Pick-up Date" class="sr-only">Pick-up Date:</label>
-                                                    <input type="date"  class="form-control" id="pickupDate" value='<?php echo date("Y-m-d")?>'  name="pick-up_Date" required><br>
-                                                <script language="javascript">
-                                                var today = new Date();
-                                                var dd = String(today.getDate()).padStart(2, '0');
-                                                var mm = String(today.getMonth() + 1).padStart(2, '0');
-                                                var yyyy = today.getFullYear();
-
-                                                today = yyyy + '-' + mm + '-' + dd;
-                                                $('#pickupDate').attr('min',today);
-                                                $('#edit-pickup-date').attr('min',today);
                                                 
-                                                </script>
+                                                    <!-- TO AND FROM DATE FILTER  -->
+                                                    &nbsp;&nbsp;
+                                                <div class="">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input type="text" name="From" id="From" class="form-control" placeholder="From Date"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <input type="text" name="to" id="to" class="form-control" placeholder="To Date"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <br>                                     
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div style= "margin-top: -20px;" class="form-group mx-sm-3 mb-2">
-                                                    <label for="collector_Selection" class="sr-only">Select a Collector</label>
-                                                    <select  class="form-select" name="select-collector" id="selectedCollector" aria-label="Default select example">
-                                                    <?php populate(); ?>
-                                                    </select>
                                                 </div>
-                                                <div style= "margin-top: -5px;" class="form-group mx-sm-3 mb-2">
-                                                    <label for="schedule_status_selection" class="sr-only">Select a Collector</label>
-                                                    <select  class="form-select" name="schedule-status" id="scheduleStatus" aria-label="Default select example">
-                                                            <option value ="1">Open</option>
-                                                            <option value ="0">Close</option>
-                                                    </select>
+                                                &nbsp;&nbsp;
+                                                <ul class="booking-status-filter mb-0 d-inline-flex p-0 ">
+                                                    <input type="button" name="range" id="range" value="Filter" class="btn btn-success"/>
+                                                    &nbsp;&nbsp;
+                                                    <input type="button" name="reset" id="reset" value="Reset" class="btn btn-outline-warning btn-sm"/>
+                                                    &nbsp;&nbsp;
+                                                </ul>
+                                        <!-- END OF TO AND FROM DATE FILTER  -->
+
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <!-- The Modal -->
+                                                <div class="modal fade" id="myModal">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <!-- Modal Header -->
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Add Schedule</h4>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                            </div>
+
+                                                            <!-- Modal body -->
+                                                            <div class="modal-body" >
+                                                                <form class="form-inline" id="myForm" action="#">
+
+                                                                <div class="form-group mx-sm-3 mb-2">
+                                                                <label for="pickUpLocation" class="sr-only">Select a Collector</label>
+                                                                        <select  class="form-select" name="pick-up-location" id="pickupLocation" aria-label="Default select example">
+                                                                        <?php location_data(); ?>
+                                                                        </select>
+                                                                        <!-- <label for="pickUpLocation" class="sr-only">Pick-up Location</label>
+                                                                        <input type="text" class="form-control" id="pickupLocation" name="pick-up-location"  placeholder="Location" required> -->
+                                                                    </div>
+                                                                    <div class="form-group mx-sm-3 mb-2">
+                                                                        <label for="Pick-up Date" class="sr-only">Pick-up Date:</label>
+                                                                        <input type="date"  class="form-control" id="pickupDate" value='<?php echo date("Y-m-d")?>'  name="pick-up_Date" required><br>
+                                                                    <script language="javascript">
+                                                                    var today = new Date();
+                                                                    var dd = String(today.getDate()).padStart(2, '0');
+                                                                    var mm = String(today.getMonth() + 1).padStart(2, '0');
+                                                                    var yyyy = today.getFullYear();
+
+                                                                    today = yyyy + '-' + mm + '-' + dd;
+                                                                    $('#pickupDate').attr('min',today);
+                                                                    $('#edit-pickup-date').attr('min',today);
+                                                                    
+                                                                    </script>
+                                                                    </div>
+                                                                    <div style= "margin-top: -20px;" class="form-group mx-sm-3 mb-2">
+                                                                        <label for="collector_Selection" class="sr-only">Select a Collector</label>
+                                                                        <select  class="form-select" name="select-collector" id="selectedCollector" aria-label="Default select example">
+                                                                        <?php populate(); ?>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div style= "margin-top: -5px;" class="form-group mx-sm-3 mb-2">
+                                                                        <label for="schedule_status_selection" class="sr-only">Select a Collector</label>
+                                                                        <select  class="form-select" name="schedule-status" id="scheduleStatus" aria-label="Default select example">
+                                                                                <option value ="1">Open</option>
+                                                                                <option value ="0">Close</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="form-group mx-sm-3 mb-2">
+                                                                        <label for="bookinglimit" class="sr-only">Booking Limit (10-50):</label>
+                                                                        <input type="text" class="form-control" value='10' id="bookingLimit" min="10" max="50" size='2' name="booking-limit"  placeholder="No. of booking" required>
+                                                                    </div>
+                                                                    <!-- <div class="form-group mx-sm-3 mb-2">
+                                                                        <label for="lat-top-left" class="sr-only">Latitude - top - left</label>
+                                                                        <input type="text" class="form-control" id="lattopleft" name="lat-top-left"  placeholder="Latitude Top Left" required>
+                                                                    </div>
+                                                                    <div class="form-group mx-sm-3 mb-2">
+                                                                        <label for="lng-top-left" class="sr-only">Longitude - top - leftt</label>
+                                                                        <input type="text" class="form-control" id="lngtopleft" name="lng-top-left"  placeholder="Longitude Top Left" required>
+                                                                    </div>
+                                                                    <div class="form-group mx-sm-3 mb-2">
+                                                                        <label for="lat-top-right" class="sr-only">Latitude - top - right</label>
+                                                                        <input type="text" class="form-control" id="lattopright" name="lat-top-right"  placeholder="Latitude Top Right" required>
+                                                                    </div>
+                                                                    <div class="form-group mx-sm-3 mb-2">
+                                                                        <label for="lng-top-right" class="sr-only">Longitude - top - right</label>
+                                                                        <input type="text" class="form-control" id="lngtopright" name="lng-top-right"  placeholder="Longitude Top Right" required>
+                                                                    </div>
+                                                                    <div class="form-group mx-sm-3 mb-2">
+                                                                        <label for="lat-bottom-right" class="sr-only">Latitude - bottom - right</label>
+                                                                        <input type="text" class="form-control" id="latbottomright" name="lat-bottom-right"  placeholder="Latitude Bottom Right" required>
+                                                                    </div>
+                                                                    <div class="form-group mx-sm-3 mb-2">
+                                                                        <label for="lng-bottom-right" class="sr-only">Longitude - bottom - right</label>
+                                                                        <input type="text" class="form-control" id="lngbottomright" name="lng-bottom-right"  placeholder="Longitude Bottom Right" required>
+                                                                    </div>
+                                                                    <div class="form-group mx-sm-3 mb-2">
+                                                                        <label for="lat-bottom-left" class="sr-only">Latitude - bottom - left</label>
+                                                                        <input type="text" class="form-control" id="latbottomleft" name="lat-bottom-left"  placeholder="Latitude Bottom Left" required>
+                                                                    </div>
+                                                                    <div class="form-group mx-sm-3 mb-2">
+                                                                        <label for="lng-bottom-left" class="sr-only">Longitude - bottom - left</label>
+                                                                        <input type="text" class="form-control" id="lngbottomleft" name="lng-bottom-left"  placeholder="Longitude Bottom Left" required>
+                                                                    </div> -->
+                                                                </form>
+                                                            </div>
+                                                            <!-- Modal footer -->
+                                                            <div class="modal-footer">
+                                                                    <button type="submit" form="myForm" name="btn-add-schedule" id="add-schedule" class="btn btn-primary" >Add Schedule</button>
+                                                                <button type="button" form="nameform" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="bookinglimit" class="sr-only">Booking Limit (10-50):</label>
-                                                    <input type="text" class="form-control" value='10' id="bookingLimit" min="10" max="50" size='2' name="booking-limit"  placeholder="No. of booking" required>
-                                                </div>
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="lat-top-left" class="sr-only">Latitude - top - left</label>
-                                                    <input type="text" class="form-control" id="lattopleft" name="lat-top-left"  placeholder="Latitude Top Left" required>
-                                                </div>
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="lng-top-left" class="sr-only">Longitude - top - leftt</label>
-                                                    <input type="text" class="form-control" id="lngtopleft" name="lng-top-left"  placeholder="Longitude Top Left" required>
-                                                </div>
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="lat-top-right" class="sr-only">Latitude - top - right</label>
-                                                    <input type="text" class="form-control" id="lattopright" name="lat-top-right"  placeholder="Latitude Top Right" required>
-                                                </div>
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="lng-top-right" class="sr-only">Longitude - top - right</label>
-                                                    <input type="text" class="form-control" id="lngtopright" name="lng-top-right"  placeholder="Longitude Top Right" required>
-                                                </div>
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="lat-bottom-right" class="sr-only">Latitude - bottom - right</label>
-                                                    <input type="text" class="form-control" id="latbottomright" name="lat-bottom-right"  placeholder="Latitude Bottom Right" required>
-                                                </div>
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="lng-bottom-right" class="sr-only">Longitude - bottom - right</label>
-                                                    <input type="text" class="form-control" id="lngbottomright" name="lng-bottom-right"  placeholder="Longitude Bottom Right" required>
-                                                </div>
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="lat-bottom-left" class="sr-only">Latitude - bottom - left</label>
-                                                    <input type="text" class="form-control" id="latbottomleft" name="lat-bottom-left"  placeholder="Latitude Bottom Left" required>
-                                                </div>
-                                                <div class="form-group mx-sm-3 mb-2">
-                                                    <label for="lng-bottom-left" class="sr-only">Longitude - bottom - left</label>
-                                                    <input type="text" class="form-control" id="lngbottomleft" name="lng-bottom-left"  placeholder="Longitude Bottom Left" required>
-                                                </div>
-                                            </form>
+                                                <!-- MODAl -->
+                                            </div>
+                                            
+                                            <div class="d-flex align-items-center">
+                                                <!-- Button to Open the Modal -->
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                                                Add Schedule
+                                                </button>
+                                            
+                                            </div>
                                         </div>
-                                        <!-- Modal footer -->
-                                        <div class="modal-footer">
-                                                <button type="submit" form="myForm" name="btn-add-schedule" id="add-schedule" class="btn btn-primary" >Add Schedule</button>
-                                            <button type="button" form="nameform" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- MODAl -->
-                        </div>
-                        
-                        <div class="d-flex align-items-center">
-                            <!-- Button to Open the Modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-                            Add Schedule
-                            </button>
-                        
-                        </div>
-                    </div>
-                    <hr class="mt-4">
-                    <div class="scrollbarSchedule pe-2" style="overflow: scroll; ">
-                        <div class="schedule-list">
-                            <div >
-                            <table id= "date_range"style="text-align:center; "class="table table-hover"width="100%"><tr><th>Action</th> <th>Schedule ID</th><th>Collector Id</th> <th>Pick-up Area</th> <th>Pick-up Date</th><th>Max Booking</th><th>Status</th> <th>Latitude Top Left</th> <th>Longitude Top Left</th>  <th>Latitude Top Right</th> <th>Longitude Top Right</th> <th>Latitude Bottom Right</th>  <th>Longitude Bottom Right</th> <th>Latitude Bottom Left</th>  <th>Longitude Bottom Left</th> <tr>
-                                <?php
-                        
-                                    $sqlGetScheduleData = "SELECT * FROM pickup_schedule inner join collector on collector.collector_id = pickup_schedule.collector_id";
-                                    $executeQuery = mysqli_query($connection, $sqlGetScheduleData);
+                                        <hr class="mt-4">
+                                        <div class="scrollbarSchedule pe-2" style="overflow: scroll; ">
+                                            <div class="schedule-list">
+                                                <div>
+                                                <table id= "date_range"style="text-align:center; "class="table table-hover"width="100%"><tr><th>Action</th> <th>Schedule ID</th><th>Collector Id</th> <th>Pick-up Area</th> <th>Pick-up Date</th><th>Max Booking</th><th>Status</th>  <tr>
+                                                    <?php
+                                            
+                                                        $sqlGetScheduleData = "SELECT * FROM pickup_schedule inner join collector on collector.collector_id = pickup_schedule.collector_id inner join location on location.location_id = pickup_schedule.pickup_area";
+                                                        $executeQuery = mysqli_query($connection, $sqlGetScheduleData);
+                                                    
+                                                        while($row = mysqli_fetch_array($executeQuery)){
+                                                    ?>
+                                                    <tr class="schedule-data">
+                                                    <td><button type="button" class="btn btn-warning" id="edit-schedule"  value = '<?php echo $row['schedule_id'];?>'><ion-icon name="create-outline"></ion-icon></button><button type="button" class="btn btn-danger"  id="delete-schedule" name="delete" value = '<?php echo $row['schedule_id'];?>'> <ion-icon name="trash-outline"></ion-icon></button></td>    
+                                                        <td class="id-data"><?php echo $row['schedule_id']; ?></td>
+                                                        <td class="collector-data" id="<?php echo $row['collector_id']; ?>"><?php echo $row['collector_firstname']." ".$row['collector_lastname'];; ?></td>
+                                                        <td class="area-data" id="<?php echo $row['location_id']; ?>" ><?php echo $row['location_name']; ?></td>
+                                                        <td class="date-data"><?php echo $row['pickup_date']; ?></td>
+                                                        <td class="max-data"><?php echo $row['max_booking'];?></td>
+                                                        <td class="status-data">
+                                                            <?php 
+                                                                if($row['schedule_status'] == 0) {
+                                                                    echo "Close";
+                                                                    
+                                                                } else {
+                                                                    echo "Open";
+                                                                }          
+                                                            ?>
+                                                        </td>
+
+                                                     
                                 
-                                    while($row = mysqli_fetch_array($executeQuery)){
-                                ?>
-                                <tr class="schedule-data">
-                                <td><button type="button" class="btn btn-warning" id="edit-schedule"  value = '<?php echo $row['schedule_id'];?>'><ion-icon name="create-outline"></ion-icon></button><button type="button" class="btn btn-danger"  id="delete-schedule" name="delete" value = '<?php echo $row['schedule_id'];?>'> <ion-icon name="trash-outline"></ion-icon></button></td>    
-                                    <td class="id-data"><?php echo $row['schedule_id']; ?></td>
-                                    <td class="collector-data" id="<?php echo $row['collector_id']; ?>"><?php echo $row['collector_firstname']." ".$row['collector_lastname'];; ?></td>
-                                    <td class="area-data"><?php echo $row['pickup_area']; ?></td>
-                                    <td class="date-data"><?php echo $row['pickup_date']; ?></td>
-                                    <td class="max-data"><?php echo $row['max_booking'];?></td>
-                                    <td class="status-data">
-                                        <?php 
-                                            if($row['schedule_status'] == 0) {
-                                                echo "Close";
-                                                
-                                            } else {
-                                                echo "Open";
-                                            }          
-                                        ?>
-                                    </td>
+                                                                </tr>  
+                                                        </tr>
+                                                        <?php 
+                                                            }
+                                                        ?>
+                                                    </table>     
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
 
-                                    <td class="lattopleft "><?php echo $row['lat_top_left'];?></td>
-                                    <td class="lngtopleft"><?php echo $row['lng_top_left'];?></td>
-                                    <td class="lattopright"><?php echo $row['lat_top_right'];?></td>
-                                    <td class="lngtopright"><?php echo $row['lng_top_right'];?></td>
-                                    <td class="latbottomright"><?php echo $row['lat_bottom_right'];?></td>
-                                    <td class="lngbottomright"><?php echo $row['lng_bottom_right'];?></td>
-                                    <td class="latbottomleft"><?php echo $row['lat_bottom_left'];?></td>
-                                    <td class="lngbottomleft"><?php echo $row['lng_bottom_left'];?></td>
-               
-                                </tr>  
-                        </tr>
-                        <?php 
-                            }
-                        ?>
-                                </table>     
-                            </div>
+                            <!-- END OF CONTENT -->
                         </div>
+                    <!--END OF TAB  -->
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <!-- Button trigger modal -->
+                    
+
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-modal">
+                            Add Location
+                            </button>
+                            <div  class="scrollbarSchedule pe-2" style="overflow: scroll; ">
+                            <div id="data">
+                            </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="add-modal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-fullscreen">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"> Add Location</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                          
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-8"> 
+                                                        
+                                                         <div class="column-display-wrapper bg-white my-2 py-2 px-3 w-100 rounded shadow-sm">    
+                                                            <div id="googleMap" style="width:100%;height:90%;"></div>  
+                                                            <p>Please select coordinate</p>
+                                                        </div>  
+                                                     </div>
+                                                    <div class="col-4">
+                                                        <h4>Selected Coordinate</h4>
+                                                        <button type="button" id="clr-markers" onclick="test()" class="btn btn-primary btn-sm">Clear Lines</button>
+                                                        <div class="container-sm bg-white">
+                                                                <div class="form-group mx-sm-3 mb-2">
+                                                                     <label for="lat-top-left" class="sr-only">Location Name</label>
+                                                                    <input type="Location Name" class="form-control" id="location-name" name="locationName"  placeholder="Name" required>
+                                                                </div>
+                                                                <div class="form-group mx-sm-3 mb-2">
+                                                                    <label for="lat-top-left" class="sr-only">Latitude - top - left</label>
+                                                                    <input type="text" class="form-control" id="loc-lattopleft" name="loc-lat-top-left"  placeholder="Set Mark" disabled >
+                                                                </div>
+                                                                <div class="form-group mx-sm-3 mb-2">
+                                                                    <label for="lng-top-left" class="sr-only">Latitude - top - Left</label>
+                                                                    <input type="number" class="form-control" id="loc-lngtopleft" name="loc-lng-top-left"  placeholder="Set Mark" disabled>
+                                                                </div>
+                                                                <div class="form-group mx-sm-3 mb-2">
+                                                                    <label for="lat-top-right" class="sr-only">Latitude - top - right</label>
+                                                                    <input type="text" class="form-control" id="loc-lattopright" name="loc-lat-top-right"  placeholder="Set Mark" disabled >
+                                                                </div>
+                                                                <div class="form-group mx-sm-3 mb-2">
+                                                                    <label for="lng-top-right" class="sr-only">Latitude - top - right</label>
+                                                                    <input type="number" class="form-control" id="loc-lngtopright" name="loc-lng-top-right"  placeholder="Set Mark" disabled>
+                                                                </div>
+                                                                <div class="form-group mx-sm-3 mb-2">
+                                                                    <label for="lat-bottom-left" class="sr-only">Latitude - bottom - left</label>
+                                                                    <input type="text" class="form-control" id="loc-latbottomleft" name="loc-lat-bottom-left"  placeholder="Set Mark" disabled >
+                                                                </div>
+                                                                <div class="form-group mx-sm-3 mb-2">
+                                                                    <label for="lng-bottom-left" class="sr-only">Latitude - bottom - left</label>
+                                                                    <input type="number" class="form-control" id="loc-lngbottomleft" name="loc-lng-bottom-left"  placeholder="Set Mark" disabled>
+                                                                </div>
+                                                                <div class="form-group mx-sm-3 mb-2">
+                                                                    <label for="lat-bottom-right" class="sr-only">Latitude - bottom - right</label>
+                                                                    <input type="text" class="form-control" id="loc-latbottomright" name="loc-lat-bottom-right"  placeholder="Set Mark" disabled >
+                                                                </div>
+                                                                <div class="form-group mx-sm-3 mb-2">
+                                                                    <label for="lng-bottom-right" class="sr-only">Latitude - bottom - right</label>
+                                                                    <input type="number" class="form-control" id="loc-lngbottomright" name="loc-lng-bottom-right"  placeholder="Set Mark" disabled>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                                                    
+                               
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" id="add-location-btn" class="btn btn-primary">Add Location</button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                      
+                          
                     </div>
-            </div>
-        </div>
+                    <!-- END OF LOCATION TAB -->
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                </div>
+            </div> 
+            <!-- END OF COL 7 -->
+
+
         <div class="col-3">
             <div class="column-display-wrapper bg-white my-2 py-2 px-3 w-100 rounded shadow-sm" style="overflow: scroll;">
                 <p class="fs-4 text-muted m-0" style="text-align:center">Content Board</p>
+
+                <div id="edit-location-form">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="lat-top-left" class="sr-only">Location Name</label>
+                        <input type='text' style="display:none;" id='edit-location-id'/>
+                        <input type="text" class="form-control" id="edit-location-name" name="editlocationName"  placeholder="Name" required>  
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="lat-top-left" class="sr-only">Latitude - top - left</label>
+                        <input type="text" class="form-control" id="editloc-lattopleft" name="editloc-lat-top-left"  placeholder="Set Mark" disabled >
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="lng-top-left" class="sr-only">Latitude - top - Left</label>
+                        <input type="number" class="form-control" id="editloc-lngtopleft" name="editloc-lng-top-left"  placeholder="Set Mark" disabled>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="lat-top-right" class="sr-only">Latitude - top - right</label>
+                        <input type="text" class="form-control" id="editloc-lattopright" name="editloc-lat-top-right"  placeholder="Set Mark" disabled >
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="lng-top-right" class="sr-only">Latitude - top - right</label>
+                        <input type="number" class="form-control" id="editloc-lngtopright" name="editloc-lng-top-right"  placeholder="Set Mark" disabled>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="lat-bottom-left" class="sr-only">Latitude - bottom - left</label>
+                        <input type="text" class="form-control" id="editloc-latbottomleft" name="editloc-lat-bottom-left"  placeholder="Set Mark" disabled >
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="lng-bottom-left" class="sr-only">Latitude - bottom - left</label>
+                        <input type="number" class="form-control" id="editloc-lngbottomleft" name="editloc-lng-bottom-left"  placeholder="Set Mark" disabled>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="lat-bottom-right" class="sr-only">Latitude - bottom - right</label>
+                        <input type="text" class="form-control" id="editloc-latbottomright" name="editloc-lat-bottom-right"  placeholder="Set Mark" disabled >
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="lng-bottom-right" class="sr-only">Latitude - bottom - right</label>
+                        <input type="number" class="form-control" id="editloc-lngbottomright" name="editloc-lng-bottom-right"  placeholder="Set Mark" disabled>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                    <button type="submit" id="submit-edit-location" class="btn btn-primary">Submit</button>
+                        <button type="submit" id="cancel-edit" class="btn btn-danger">Cancel</button>
+                                                        </div>
+                </div>
                
                 <div id="edit-schedule-form">
                  <form> 
@@ -269,8 +421,11 @@
                         <h6>Schedule ID</h6>   <p id="schedule-id"></p>
                         </div>
                         <div class="mb-3">
-                        <label for="pickuplocation" class="form-label">Pick-up Location:</label>
-                        <input type="text" class="form-control" id="edit-pickup-location">
+                        <select  class="form-select" name="pick-up-location" id="edit-pickup-location" aria-label="Default select example">
+                                                                        <?php location_data(); ?>
+                                                                        </select>
+                        <!-- <label for="pickuplocation" class="form-label">Pick-up Location:</label>
+                        <input type="text" class="form-control" id="edit-pickup-location"> -->
                         </div>
                         <div class="mb-3">
                         <label for="Pick-up Date" class="sr-only">Pick-up Date:</label>
@@ -305,7 +460,8 @@
                         <div class="mb-3">
                                 <label for="booking-limit" class="sr-only">Booking Limit (10-50)</label>
                                 <input type="number" class="form-control" id="booking-limit" min="10" max="50" size='2'name="booking-limit"  placeholder="No. of booking">
-                         </div> <div class="form-group mx-sm-3 mb-2">
+                                 </div> 
+                                                <!-- <div class="form-group mx-sm-3 mb-2">
                                                     <label for="lat-top-left" class="sr-only">Latitude - top - left</label>
                                                     <input type="number" class="form-control" id="editlattopleft" name="lat-top-left"  placeholder="Latitude Top Left" required>
                                                 </div>
@@ -336,7 +492,7 @@
                                                 <div class="form-group mx-sm-3 mb-2">
                                                     <label for="lng-bottom-left" class="sr-only">Longitude - bottom - left</label>
                                                     <input type="number" class="form-control" id="editlngbottomleft" name="lng-bottom-left"  placeholder="Longitude Bottom Left" required>
-                                                </div>
+                                                </div> -->
                         <button type="submit" id="submit-edit" class="btn btn-primary">Submit</button>
                         <button type="submit" id="cancel-edit" class="btn btn-danger">Cancel</button>
                  </form>
@@ -350,6 +506,9 @@
         </div>
     </section>
 </body>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpPDC_WyTSxvHhMSpLDhzJi680ZciTbf4&callback=myMap">
+    // juncle Google map api KEY
+  </script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

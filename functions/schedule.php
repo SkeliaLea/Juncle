@@ -92,6 +92,27 @@ function populate(){
   
   }
 
+
+  function location_data(){
+
+    $conn = new mysqli("localhost",'root', '', "juncle");
+    $sql ="SELECT * FROM location ";
+  
+    $result = mysqli_query($conn, $sql); 
+    if ($result->num_rows > 0) {
+      // output data of each row
+      while($row = $result->fetch_assoc()) {
+  
+  
+          echo "<option value='".$row['location_id']."'>".$row['location_name']."</option>";
+        
+      }
+  } else {
+      echo "0 results";
+  }
+  
+  }
+
   function displaydata(){
 
     $sql_querys = "SELECT pickup_schedule.schedule_id, collector.collector_last_name, collector.collector_first_name, pickup_schedule.pickup_date, pickup_schedule.pickup_area, pickup_schedule.schedule_status FROM pickup_schedule 

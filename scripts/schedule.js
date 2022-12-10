@@ -33,6 +33,7 @@ $(document).on('click',  '#cancel-edit', function(){
      $("#table_data").find("input,button,textarea,select").removeAttr("disabled");
      $("#no-schedule-form").show();
      $("#edit-schedule-form").hide();
+     $("#edit-location-form").hide();  
 });
 
 
@@ -40,7 +41,7 @@ $(document).on('click',  '#cancel-edit', function(){
 $(document).on('click', '#submit-edit', function(){
     $("#table_data").find("input,button,textarea,select").removeAttr("disabled");
     $("#edit-schedule-form").hide();
-
+    $("#edit-location-form").hide();  
 
     let schedule_id =  $("#schedule-id").text();
     let location = $("#edit-pickup-location").val();
@@ -50,14 +51,7 @@ $(document).on('click', '#submit-edit', function(){
     let limit = $("#booking-limit").val();
 
 
-    let lattopleft = $("#editlattopleft").val();
-    let lngtopleft =$("#editlngtopleft").val();
-    let lattopright =$("#editlattopright").val();
-    let lngtopright =$("#editlngtopright").val();
-    let latbottomright =$("#editlatbottomright").val();
-    let lngbottomright =$("#editlngbottomright").val();
-    let latbottomleft =$("#editlatbottomleft").val();;
-    let lngbottomleft =$("#editlngbottomleft").val();
+   
 
     $.ajax({
         type: "POST",
@@ -68,15 +62,15 @@ $(document).on('click', '#submit-edit', function(){
            date: date,
            collector : collector,
            limit : limit, 
-           status : status	,
-            lattopleft :lattopleft ,
-            lngtopleft:lngtopleft,
-            lattopright:lattopright,
-            lngtopright:lngtopright,
-            latbottomright:latbottomright,
-            lngbottomright:lngbottomright,
-            latbottomleft:latbottomleft,
-            lngbottomleft:lngbottomleft
+           status : status,
+            // lattopleft :lattopleft ,
+            // lngtopleft:lngtopleft,
+            // lattopright:lattopright,
+            // lngtopright:lngtopright,
+            // latbottomright:latbottomright,
+            // lngbottomright:lngbottomright,
+            // latbottomleft:latbottomleft,
+            // lngbottomleft:lngbottomleft
         },
         cache: false,
         success: function(dataResult){
@@ -92,29 +86,29 @@ $(document).on('click', '#submit-edit', function(){
 
 
 $(document).on('click', "#edit-schedule", function () {
-
+    $("#edit-location-form").hide(); 
     $("#table_data").find("input,button,textarea,select").attr("disabled", "disabled");
 
     $("#edit-schedule-form").show();
     $("#no-schedule-form").hide();
-    
+   
     let currentRow=$(this).closest("tr"); 
     let schedule_id =currentRow.find("td:eq(1)").text();  // Schedule ID
     let collector_id = currentRow.find("td:eq(2)").attr('id');
 
-    let location =currentRow.find("td:eq(3)").text();  // pick Location
+    let location =currentRow.find("td:eq(3)").attr('id');  // pick Location
     let date =currentRow.find("td:eq(4)").text();  // Pick up date
     let current_limit =currentRow.find("td:eq(5)").text(); 
     let status =currentRow.find("td:eq(6)").text();  // schedule status
 
-    let lattopleft  = currentRow.find("td:eq(7)").text();
-    let lngtopleft=  currentRow.find("td:eq(8)").text();
-    let lattopright=currentRow.find("td:eq(9)").text();
-    let lngtopright= currentRow.find("td:eq(10)").text();
-    let latbottomright= currentRow.find("td:eq(11)").text();
-    let lngbottomright=currentRow.find("td:eq(12)").text();
-    let latbottomleft= currentRow.find("td:eq(13)").text();
-    let lngbottomleft=  currentRow.find("td:eq(14)").text();
+    // let lattopleft  = currentRow.find("td:eq(7)").text();
+    // let lngtopleft=  currentRow.find("td:eq(8)").text();
+    // let lattopright=currentRow.find("td:eq(9)").text();
+    // let lngtopright= currentRow.find("td:eq(10)").text();
+    // let latbottomright= currentRow.find("td:eq(11)").text();
+    // let lngbottomright=currentRow.find("td:eq(12)").text();
+    // let latbottomleft= currentRow.find("td:eq(13)").text();
+    // let lngbottomleft=  currentRow.find("td:eq(14)").text();
 
     let valueDate = date.slice(0,10);
 
@@ -124,14 +118,14 @@ $(document).on('click', "#edit-schedule", function () {
     $("#edit-selected-collector").val(collector_id).change();
     $("#booking-limit").val(current_limit).change();
 
-    $("#editlattopleft").val(lattopleft);
-    $("#editlngtopleft").val(lngtopleft);
-    $("#editlattopright").val(lattopright);
-    $("#editlngtopright").val(lngtopright);
-    $("#editlatbottomright").val(latbottomright);
-    $("#editlngbottomright").val(lngbottomright);
-    $("#editlatbottomleft").val(latbottomleft);;
-    $("#editlngbottomleft").val(lngbottomleft);
+    // $("#editlattopleft").val(lattopleft);
+    // $("#editlngtopleft").val(lngtopleft);
+    // $("#editlattopright").val(lattopright);
+    // $("#editlngtopright").val(lngtopright);
+    // $("#editlatbottomright").val(latbottomright);
+    // $("#editlngbottomright").val(lngbottomright);
+    // $("#editlatbottomleft").val(latbottomleft);;
+    // $("#editlngbottomleft").val(lngbottomleft);
     
 
 
@@ -170,14 +164,14 @@ $(document).on('click' ,"#delete-schedule",function(){
             let status = $("#scheduleStatus").val();
             let max = $("#bookingLimit").val();
 
-            let lattopleft  = $("#lattopleft").val();
-            let lngtopleft= $("#lngtopleft").val();
-            let lattopright= $("#lattopright").val();
-            let lngtopright= $("#lngtopright").val();
-            let latbottomright= $("#latbottomright").val();
-            let lngbottomright= $("#lngbottomright").val();
-            let latbottomleft= $("#latbottomleft").val();
-            let lngbottomleft= $("#lngbottomleft").val();
+            // let lattopleft  = $("#lattopleft").val();
+            // let lngtopleft= $("#lngtopleft").val();
+            // let lattopright= $("#lattopright").val();
+            // let lngtopright= $("#lngtopright").val();
+            // let latbottomright= $("#latbottomright").val();
+            // let lngbottomright= $("#lngbottomright").val();
+            // let latbottomleft= $("#latbottomleft").val();
+            // let lngbottomleft= $("#lngbottomleft").val();
 
             $.ajax({
                 type: "POST",
@@ -188,14 +182,14 @@ $(document).on('click' ,"#delete-schedule",function(){
                     collector : collector, 
                     status : status,
                     max : max,
-                    lattopleft :lattopleft,
-                    lngtopleft :lngtopleft,
-                    lattopright : lattopright,
-                    lngtopright : lngtopright,
-                    latbottomright :latbottomright,
-                    lngbottomright : lngbottomright,
-                    latbottomleft : latbottomleft,
-                    lngbottomleft : lngbottomleft
+                    // lattopleft :lattopleft,
+                    // lngtopleft :lngtopleft,
+                    // lattopright : lattopright,
+                    // lngtopright : lngtopright,
+                    // latbottomright :latbottomright,
+                    // lngbottomright : lngbottomright,
+                    // latbottomleft : latbottomleft,
+                    // lngbottomleft : lngbottomleft
                 },
                 cache: false,
                 success: function(dataResult){
